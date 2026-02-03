@@ -1,4 +1,15 @@
 from pathlib import Path
+import os
+
+FRONTEND_URL = os.environ.get("FRONTEND_URL")
+
+CORS_ALLOWED_ORIGINS = []
+if FRONTEND_URL:
+    CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
+
+CSRF_TRUSTED_ORIGINS = []
+if FRONTEND_URL:
+    CSRF_TRUSTED_ORIGINS.append(FRONTEND_URL)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
