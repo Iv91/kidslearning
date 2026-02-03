@@ -355,3 +355,52 @@
     padding-top: 60px !important;
     padding-bottom: 60px !important;
 }
+
+/* =====================================================
+   HERO FIX: ONLY mobile changes, desktop unchanged
+   ===================================================== */
+
+/* Desktop/tablet (>=768px): keep your current design */
+@media (min-width: 768px) {
+    .rbt-banner-3 {
+        background-image: url("../images/backgroundchildren.jpg") !important;
+        background-position: right center !important;
+        background-size: 55% auto !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .kl-hero-mobile-image {
+        display: none !important;
+    }
+
+    /* keep desktop overlay fade if you use it */
+    .rbt-banner-3::after {
+        display: block !important;
+    }
+}
+
+/* Mobile (<768px): image above text */
+@media (max-width: 767px) {
+    .rbt-banner-3 {
+        background-image: none !important;
+    }
+
+    .rbt-banner-3::after,
+    .rbt-banner-3::before {
+        content: none !important;
+        display: none !important;
+    }
+
+    .kl-hero-mobile-image {
+        margin-bottom: 20px;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .kl-hero-mobile-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
