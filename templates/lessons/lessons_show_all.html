@@ -1,0 +1,90 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load lesson_translations %}
+
+{% block title %}
+  {% if lang == "sr" %}
+    Svi časovi
+  {% elif lang == "de" %}
+    Alle Lektionen
+  {% else %}
+    All Lessons
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="height:150px;"></div>
+
+<div class="container my-4">
+
+  <h3 class="mb-4">
+
+    {% if lang == "sr" %}
+      📚 Svi časovi
+    {% elif lang == "de" %}
+      📚 Alle Lektionen
+    {% else %}
+      📚 All Lessons
+    {% endif %}
+
+    {% if query %}
+      <small class="text-muted">
+        {% if lang == "sr" %}
+          za "{{ query }}"
+        {% elif lang == "de" %}
+          für "{{ query }}"
+        {% else %}
+          for "{{ query }}"
+        {% endif %}
+      </small>
+    {% endif %}
+  </h3>
+
+  <div class="row">
+
+    {% for lesson in lessons %}
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card h-100 shadow-sm">
+
+          <!-- Image -->
+          {% if lesson.image %}
+            <img src="{{ lesson.image.url }}" class="card-img-top"
+                 alt="{{ lesson|get_title:lang }}"
+                 style="height:150px; object-fit:contain;">
+          {% else %}
+            <img src="{% static 'assets/images/placeholders/lesson.png' %}"
+                 class="card-img-top" alt="Lesson">
+          {% endif %}
+
+          <!-- Title + View Button -->
+          <div class="card-body text-center">
+
+            <h6 class="card-title">{{ lesson|get_title:lang }}</h6>
+
+            <a href="{% url 'lesson_detail' lesson.id %}?lang={{ lang }}"
+               class="btn btn-sm btn-primary">
+
+              {% if lang == "sr" %}
+                Pogledaj
+              {% elif lang == "de" %}
+                Anzeigen
+              {% else %}
+                View
+              {% endif %}
+
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    {% empty %}
+      <p class="text-center mt-4">
+        {% if lang == "sr" %}Nema dostupnih časova.{% elif lang == "de" %}Keine Lektionen verfügbar.{% else %}No lessons available yet.{% endif %}
+      </p>
+    {% endfor %}
+
+  </div>
+
+</div>
+{% endblock %}

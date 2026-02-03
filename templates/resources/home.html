@@ -1,0 +1,127 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if lang == "sr" %}Resursi - KidsLearning
+  {% elif lang == "de" %}Arbeitsblätter - KidsLearning
+  {% else %}Resources - KidsLearning
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="height:150px;"></div>
+
+<!-- Page Header -->
+<section class="page-header text-center py-5">
+  <div class="container">
+    <h1 class="fw-bold">
+      {% if lang == "sr" %}Radni listovi za štampanje
+      {% elif lang == "de" %}Ausdruckbare Arbeitsblätter
+      {% else %}Printable Worksheets{% endif %}
+    </h1>
+    <p class="lead">
+      {% if lang == "sr" %}
+        Preuzmite zabavne i edukativne radne listove za vežbanje engleskog van ekrana.
+      {% elif lang == "de" %}
+        Lade lustige und lehrreiche Arbeitsblätter herunter, um Englisch offline zu üben.
+      {% else %}
+        Download fun and educational worksheets to practice English offline.
+      {% endif %}
+    </p>
+  </div>
+</section>
+
+
+
+<!-- Worksheets List -->
+<section class="resources-section py-5">
+  <div class="container">
+    <div class="row">
+      {% for worksheet in page_obj %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card shadow-sm h-100">
+
+          <!-- Worksheet Image -->
+          {% if worksheet.image %}
+            <img src="{{ worksheet.image.url }}"
+                 class="card-img-top"
+                 alt="{{ worksheet.title }}"
+                 style="height: 200px; object-fit: contain;">
+          {% else %}
+            <img src="{% static 'assets/images/placeholders/worksheet.png' %}"
+                 class="card-img-top"
+                 alt="Worksheet"
+                 style="height: 200px; object-fit: contain;">
+          {% endif %}
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ worksheet.title }}</h5>
+            <p class="card-text">{{ worksheet.description }}</p>
+
+            <div class="mt-auto d-flex gap-2 flex-wrap">
+              <a href="{{ worksheet.file.url }}" download class="btn btn-success flex-grow-1">
+                {% if lang == "sr" %}📥 Preuzmi PDF
+                {% elif lang == "de" %}📥 PDF herunterladen
+                {% else %}📥 Download PDF{% endif %}
+              </a>
+              <a href="{% url 'resource_detail' worksheet.id %}?lang={{ lang }}"
+                 class="btn btn-outline-primary flex-grow-1">
+                {% if lang == "sr" %}👀 Detalji
+                {% elif lang == "de" %}👀 Details
+                {% else %}👀 View Details{% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p>
+          {% if lang == "sr" %}
+            Još uvek nema dostupnih radnih listova. Svratite uskoro ponovo!
+          {% elif lang == "de" %}
+            Es sind noch keine Arbeitsblätter verfügbar. Schau bald wieder vorbei!
+          {% else %}
+            No worksheets available yet. Please check back soon!
+          {% endif %}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}&lang={{ lang }}">
+          {% if lang == "sr" %}Prethodna{% elif lang == "de" %}Zurück{% else %}Previous{% endif %}
+        </a>
+      </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+        <a class="page-link"
+           href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}&lang={{ lang }}">
+          {{ num }}
+        </a>
+      </li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}&lang={{ lang }}">
+          {% if lang == "sr" %}Sledeća{% elif lang == "de" %}Weiter{% else %}Next{% endif %}
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
+{% endblock %}
+

@@ -1,0 +1,399 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if lang == "sr" %}
+        O KidsLearning platformi
+    {% elif lang == "de" %}
+        Über KidsLearning
+    {% else %}
+        About KidsLearning
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- Start Banner Area -->
+<div class="rbt-banner-area rbt-banner-8 variation-02">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="content">
+                    <div class="inner text-center">
+
+                        <div class="rbt-new-badge rbt-new-badge-one">
+                            <span class="rbt-new-badge-icon">🌟</span>
+                            {% if lang == "sr" %}
+                                Zabavno učenje za decu
+                            {% elif lang == "de" %}
+                                Spielerisches Lernen für Kinder
+                            {% else %}
+                                Fun Learning for Kids
+                            {% endif %}
+                        </div>
+
+                        <h1 class="title">
+                            {% if lang == "sr" %}
+                                Otkrij, uči i igraj se
+                            {% elif lang == "de" %}
+                                Entdecken, Lernen &amp; Spielen
+                            {% else %}
+                                Discover, Learn &amp; Play
+                            {% endif %}
+                            <span class="header-caption">
+                                <span class="cd-headline clip is-full-width">
+                                    <span class="cd-words-wrapper">
+                                        <b class="is-visible theme-gradient">
+                                            {% if lang == "sr" %}
+                                                engleski.
+                                            {% elif lang == "de" %}
+                                                Englisch.
+                                            {% else %}
+                                                English.
+                                            {% endif %}
+                                        </b>
+                                        <b class="is-hidden theme-gradient">
+                                            {% if lang == "sr" %}
+                                                uz priče.
+                                            {% elif lang == "de" %}
+                                                mit Geschichten.
+                                            {% else %}
+                                                with Stories.
+                                            {% endif %}
+                                        </b>
+                                        <b class="is-hidden theme-gradient">
+                                            {% if lang == "sr" %}
+                                                uz igre.
+                                            {% elif lang == "de" %}
+                                                mit Spielen.
+                                            {% else %}
+                                                with Games.
+                                            {% endif %}
+                                        </b>
+                                        <b class="is-hidden theme-gradient">
+                                            {% if lang == "sr" %}
+                                                uz radne listove.
+                                            {% elif lang == "de" %}
+                                                mit Arbeitsblättern.
+                                            {% else %}
+                                                with Worksheets.
+                                            {% endif %}
+                                        </b>
+                                    </span>
+                                </span>
+                            </span>
+                        </h1>
+
+                        <p class="description has-medium-font-size mt--20">
+                            {% if lang == "sr" %}
+                                Dobrodošli na KidsLearning — prijateljsko onlajn mesto gde deca
+                                uče engleski kroz video lekcije, igre, šarene radne listove i zabavne kvizove!
+                            {% elif lang == "de" %}
+                                Willkommen bei KidsLearning – ein freundlicher Online-Ort, an dem Kinder
+                                Englisch mit Videolektionen, Spielen, bunten Arbeitsblättern und lustigen Quizzen lernen!
+                            {% else %}
+                                Welcome to KidsLearning — a friendly online place where children learn
+                                English through videos, games, colorful worksheets, and fun quizzes!
+                            {% endif %}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Banner Area -->
+
+
+<div class="rbt-about-area about-style-1 bg-color-white">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+
+            <div class="col-lg-6">
+                <div class="content">
+                    <img src="{% static 'assets/images/about.jpg' %}" alt="Kids Learning About Image">
+                </div>
+            </div>
+
+            <div class="col-lg-6" data-sal="slide-up" data-sal-duration="700">
+                <div class="inner pl--50 pl_sm--5">
+                    <div class="content text-start">
+
+                        <span class="rbt-badge-6 bg-primary-opacity">
+                            {% if lang == "sr" %}
+                                O KidsLearning platformi
+                            {% elif lang == "de" %}
+                                Über KidsLearning
+                            {% else %}
+                                About KidsLearning
+                            {% endif %}
+                        </span>
+
+                        <h3 class="title mt--10">
+                            {% if lang == "sr" %}
+                                Učenje engleskog kroz igru, boje i zabavu
+                            {% elif lang == "de" %}
+                                Englisch lernen durch Spiel, Farben &amp; Spaß
+                            {% else %}
+                                Learning English Through Play, Color &amp; Fun
+                            {% endif %}
+                        </h3>
+
+                        <p class="description mt--30">
+                            {% if lang == "sr" %}
+                                KidsLearning je napravljen posebno za mlađe učenike uzrasta 4–9 godina.
+                                Učenje engleskog činimo jednostavnim i zabavnim kroz kratke video lekcije,
+                                interaktivne kvizove i zanimljive igre.
+                            {% elif lang == "de" %}
+                                KidsLearning wurde speziell für junge Lerner im Alter von 4–9 Jahren entwickelt.
+                                Wir machen Englischlernen einfach und spannend – mit kurzen Videolektionen,
+                                interaktiven Quizzen und lustigen Spielen.
+                            {% else %}
+                                KidsLearning is designed especially for young learners aged 4–9.
+                                We make learning English simple and fun through short video lessons,
+                                interactive quizzes, and engaging games.
+                            {% endif %}
+                        </p>
+
+                        <p class="description">
+                            {% if lang == "sr" %}
+                                Aktivnosti pomažu deci da razviju vokabular, vežbaju govor,
+                                stiču samopouzdanje u čitanju i istražuju engleski na razigran način.
+                                Svaka lekcija kombinuje vizuelno učenje, pričanje priča i praktične zadatke
+                                kako bi deca učila prirodno.
+                            {% elif lang == "de" %}
+                                Die Aktivitäten helfen Kindern, ihren Wortschatz aufzubauen, das Sprechen zu üben,
+                                mehr Sicherheit beim Lesen zu gewinnen und Englisch spielerisch zu entdecken.
+                                Jede Lektion verbindet visuelles Lernen, Geschichten und praktische Aufgaben,
+                                damit Kinder ganz natürlich lernen.
+                            {% else %}
+                                Our activities help kids build vocabulary, practice speaking,
+                                develop reading confidence, and explore English in a playful way.
+                                Each lesson combines visual learning, storytelling, and hands-on tasks
+                                to help children learn naturally.
+                            {% endif %}
+                        </p>
+
+                        <div class="read-more-btn mt--40">
+                            <a class="rbt-btn rbt-marquee-btn radius-round btn-gradient"
+                               href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                <span data-text="{% if lang == 'sr' %}Počni sa učenjem{% elif lang == 'de' %}Mit dem Lernen beginnen{% else %}Start Learning{% endif %}">
+                                    {% if lang == "sr" %}
+                                        Počni sa učenjem
+                                    {% elif lang == "de" %}
+                                        Mit dem Lernen beginnen
+                                    {% else %}
+                                        Start Learning
+                                    {% endif %}
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="rbt-service-area bg-color-white rbt-section-gap">
+    <div class="container">
+
+        <div class="row mb--60">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h2 class="title">
+                        {% if lang == "sr" %}
+                            Zašto deca vole da uče sa nama
+                        {% elif lang == "de" %}
+                            Warum Kinder gerne mit uns lernen
+                        {% else %}
+                            Why Kids Love Learning With Us
+                        {% endif %}
+                    </h2>
+                    <p class="description mt--30">
+                        {% if lang == "sr" %}
+                            Jednostavne lekcije, zabavni kvizovi, šarene igre i mnogo magije u učenju!
+                        {% elif lang == "de" %}
+                            Einfache Lektionen, lustige Quizze, bunte Spiele und ganz viel Lernmagie!
+                        {% else %}
+                            Simple lessons, fun quizzes, colorful games, and lots of learning magic!
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row--15 mt_dec--30">
+
+            <!-- Lessons -->
+            <div class="col-lg-4 col-xl-3 col-xxl-3 col-md-6 col-sm-6 col-12 mt--30">
+                <div class="service-card service-card-6">
+                    <div class="inner">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/videolessons.jpg' %}" alt="Lesson Icon">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">
+                                <a href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                    {% if lang == "sr" %}
+                                        Kratke video lekcije
+                                    {% elif lang == "de" %}
+                                        Kurze Video-Lektionen
+                                    {% else %}
+                                        Short Video Lessons
+                                    {% endif %}
+                                </a>
+                            </h6>
+                            <p class="description">
+                                {% if lang == "sr" %}
+                                    Lako pratljive lekcije engleskog, pravljene za decu od 4 do 9 godina.
+                                {% elif lang == "de" %}
+                                    Leicht verständliche Englischlektionen speziell für Kinder von 4–9 Jahren.
+                                {% else %}
+                                    Easy-to-follow English lessons made just for kids aged 4–9.
+                                {% endif %}
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quizzes -->
+            <div class="col-lg-4 col-xl-3 col-xxl-3 col-md-6 col-sm-6 col-12 mt--30">
+                <div class="service-card service-card-6">
+                    <div class="inner">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/quizzes.jpg' %}" alt="Quiz Icon">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">
+                                <a href="http://localhost:3000">
+                                    {% if lang == "sr" %}
+                                        Interaktivni kvizovi
+                                    {% elif lang == "de" %}
+                                        Interaktive Quizze
+                                    {% else %}
+                                        Interactive Quizzes
+                                    {% endif %}
+                                </a>
+                            </h6>
+                            <p class="description">
+                                {% if lang == "sr" %}
+                                    Više izbora, vizuelni kvizovi, prevlačenje i igre spelovanja.
+                                {% elif lang == "de" %}
+                                    Multiple-Choice, Bild-Quizze, Drag-and-Drop und Buchstabierspiele.
+                                {% else %}
+                                    Multiple-choice, visual quizzes, drag-and-drop and spelling games.
+                                {% endif %}
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Games -->
+            <div class="col-lg-4 col-xl-3 col-xxl-3 col-md-6 col-sm-6 col-12 mt--30">
+                <div class="service-card service-card-6">
+                    <div class="inner">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/tablet.jpg' %}" alt="Game Icon">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">
+                                <a href="http://localhost:3000">
+                                    {% if lang == "sr" %}
+                                        Zabavne edukativne igre
+                                    {% elif lang == "de" %}
+                                        Lustige Lernspiele
+                                    {% else %}
+                                        Fun Learning Games
+                                    {% endif %}
+                                </a>
+                            </h6>
+                            <p class="description">
+                                {% if lang == "sr" %}
+                                    Sastavi reči, razvrstaj imenice i glagole, poveži slike i još mnogo toga.
+                                {% elif lang == "de" %}
+                                    Wörter bauen, Nomen und Verben sortieren, Bilder zuordnen und mehr.
+                                {% else %}
+                                    Build words, sort nouns &amp; verbs, match pictures, and more.
+                                {% endif %}
+                            </p>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- Worksheets -->
+            <div class="col-lg-4 col-xl-3 col-xxl-3 col-md-6 col-sm-6 col-12 mt--30">
+                <div class="service-card service-card-6">
+                    <div class="inner">
+                        <div class="icon">
+                            <img src="{% static 'assets/images/pdfs.jpg' %}" alt="Worksheet Icon">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">
+                                <a href="{% url 'resources-home' %}?lang={{ lang }}">
+                                    {% if lang == "sr" %}
+                                        Radni listovi za štampu
+                                    {% elif lang == "de" %}
+                                        Arbeitsblätter zum Ausdrucken
+                                    {% else %}
+                                        Printable Worksheets
+                                    {% endif %}
+                                </a>
+                            </h6>
+                            <p class="description">
+                                {% if lang == "sr" %}
+                                    Bojanke, zadaci povezivanja, lavirinti, zagonetke i još mnogo toga.
+                                {% elif lang == "de" %}
+                                    Malvorlagen, Zuordnungsaufgaben, Labyrinthe, Rätsel und mehr.
+                                {% else %}
+                                    Coloring pages, matching tasks, mazes, puzzles and more.
+                                {% endif %}
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const wrapper = document.querySelector(".cd-words-wrapper");
+    if (!wrapper) return;
+
+    const words = Array.from(wrapper.querySelectorAll("b"));
+    if (words.length <= 1) return;
+
+    let current = 0;
+
+    function showNextWord() {
+        words[current].classList.remove("is-visible");
+        words[current].classList.add("is-hidden");
+
+        current = (current + 1) % words.length;
+
+        words[current].classList.remove("is-hidden");
+        words[current].classList.add("is-visible");
+    }
+
+    setInterval(showNextWord, 2500);
+});
+</script>
+{% endblock extra_js %}
+
+{% endblock content %}
+

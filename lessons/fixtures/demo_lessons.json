@@ -1,0 +1,42 @@
+[
+    {
+        "model": "lessons.lessoncategory",
+        "pk": 1,
+        "fields": {
+            "name": "Basics",
+            "order": 1
+        }
+    },
+    {
+        "model": "lessons.lesson",
+        "pk": 1,
+        "fields": {
+            "title": "Basics: Colours",
+            "title_sr": "Osnove: Boje",
+            "title_de": "Grundlagen: Farben",
+            "category": 1,
+            "description": "Learn basic colours in English.",
+            "description_sr": "Naučite osnovne boje na engleskom.",
+            "description_de": "Lerne die Grundfarben auf Englisch.",
+            "video_url": "",
+            "video_file": "lesson_videos/LESSON1.mp4",
+            "image": "lesson_images/Learn_colours.jpg",
+            "created_at": "2026-01-20T08:00:00Z",
+            "order": 1,
+            "age_group": "4-5"
+        }
+    },
+    {
+        "model": "lessons.lessonblock",
+        "pk": 1,
+        "fields": {
+            "lesson": 1,
+            "title": "Blue Colour",
+            "title_sr": "Plava boja",
+            "title_de": "Blaue Farbe",
+            "video": "lesson_videos/bluesecond.mp4",
+            "block_type": "explain",
+            "order": 1
+        }
+    }
+]

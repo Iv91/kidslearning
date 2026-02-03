@@ -1,0 +1,39 @@
+# Environment files
+.env
+*.env
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+
+# Django static and media
+/media/
+staticfiles/
+static_root/
+node_modules/
+build/
+dist/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs and system
+*.log
+.DS_Store
+
+# Django Migrations (optional, keep only if you want fresh DB on deploy)
+# */migrations/__pycache__/
+# */migrations/*.py
+
+# OS Files
+Thumbs.db

@@ -1,0 +1,322 @@
+.visualquiz-container {
+    max-width: 1100px;
+    margin: 4.5rem auto 3rem;
+    padding: 0 1.5rem 3rem;
+    text-align: center;
+}
+
+/* Titles and progress */
+.visualquiz-title {
+    margin-bottom: 0.4rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1729;
+}
+
+.visualquiz-progress {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+
+/* 🔹 NEW: wrapper for 2-column layout */
+.visualquiz-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.visualquiz-left,
+.visualquiz-right {
+    width: 100%;
+}
+
+/* Question text + main image */
+.visualquiz-question-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2e7d32;
+    margin-bottom: 1.4rem;
+}
+
+.visualquiz-question-image {
+    max-width: 360px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 1.8rem;
+    border-radius: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+}
+
+/* Container for options */
+.visualquiz-options {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+/* Each clickable option “square” */
+.visualquiz-option {
+    width: 220px;
+    height: 180px;
+    padding: 0;
+    border-radius: 24px;
+    border: 2px solid transparent;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.visualquiz-option:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Selected state before submit */
+.visualquiz-option.selected {
+    border-color: #007bff;
+}
+
+/* Correct / wrong after submit */
+.visualquiz-option.correct {
+    border-color: #2e7d32;
+    background-color: #e6f5ea;
+}
+
+.visualquiz-option.wrong {
+    border-color: #c62828;
+    background-color: #fde0e0;
+}
+
+/* Make image nicely fit inside the square */
+.visualquiz-option-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Buttons & warning text */
+.visualquiz-submit,
+.visualquiz-next {
+    margin-top: 1.5rem;
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    background-color: #ff7b54;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.visualquiz-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.visualquiz-submit:hover:not(:disabled),
+.visualquiz-next:hover {
+    background-color: #ff5a2c;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.visualquiz-warning {
+    margin-top: 0.75rem;
+    color: #c62828;
+    font-weight: 500;
+}
+
+.visualquiz-feedback {
+    margin-top: 1rem;
+}
+
+.correct-text {
+    color: #2e7d32;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.wrong-text {
+    color: #c62828;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+/* Finished screen */
+.visualquiz-score {
+    font-size: 1.3rem;
+    color: #2e7d32;
+    margin-top: 0.6rem;
+    margin-bottom: 1.4rem;
+}
+
+.visualquiz-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.visualquiz-link {
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.visualquiz-link:hover {
+    background-color: #e0e0e0;
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+    .visualquiz-container {
+        margin: 4rem 1rem 3rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .visualquiz-title {
+        font-size: 1.7rem;
+    }
+
+    .visualquiz-question-text {
+        font-size: 1.15rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .visualquiz-question-image {
+        max-width: 260px;
+        margin-bottom: 1.4rem;
+    }
+
+    .visualquiz-option {
+        width: 160px;
+        height: 140px;
+    }
+
+    .visualquiz-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .visualquiz-link {
+        width: 80%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .visualquiz-submit,
+    .visualquiz-next {
+        width: 80%;
+        max-width: 280px;
+    }
+}
+
+/* 💻 Desktop: 2-column layout */
+@media (min-width: 992px) {
+    .visualquiz-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        text-align: left;
+    }
+
+    .visualquiz-left,
+    .visualquiz-right {
+        flex: 1;
+    }
+
+    .visualquiz-right {
+        max-width: 480px;
+    }
+
+    .visualquiz-question-text {
+        text-align: left;
+    }
+
+    .visualquiz-options {
+        justify-content: flex-start;
+    }
+
+    .visualquiz-warning,
+    .visualquiz-feedback,
+    .giveup-container {
+        text-align: left;
+    }
+
+    .giveup-container {
+        margin-top: 0.7rem;
+    }
+}
+
+/* (keep your intro-modal styles exactly as you already have) */
+
+.intro-multilang p {
+    margin-bottom: 14px;
+    font-size: 1rem;
+}
+
+.intro-sub {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.intro-skip {
+    margin: 10px 0 15px;
+    font-size: 0.95rem;
+    color: #333;
+    text-align: center;
+}
+
+.intro-skip input {
+    margin-right: 6px;
+}
+
+.visualquiz-text-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.visualquiz-text-option {
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 2px solid #e6e6e6;
+    background: white;
+    cursor: pointer;
+    font-weight: 700;
+    text-align: left;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.visualquiz-text-option.selected {
+    border-color: #4aa3ff;
+    background: #eaf3ff;
+}
+
+.visualquiz-text-option.correct {
+    background: #3cb371;
+    color: white;
+    border-color: #3cb371;
+}
+
+.visualquiz-text-option.wrong {
+    background: #f44336;
+    color: white;
+    border-color: #f44336;
+}

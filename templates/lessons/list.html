@@ -1,0 +1,147 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load lesson_translations %}
+
+{% block title %}
+  {% if lang == "sr" %}Časovi{% elif lang == "de" %}Lektionen{% else %}Lessons{% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="height:150px;"></div>
+
+<!-- HEADER -->
+<section class="page-header text-center py-5">
+  <div class="container">
+    <h1 class="fw-bold">
+      {% if lang == "sr" %}
+        Dobro došli u KidsLearning časove
+      {% elif lang == "de" %}
+        Willkommen bei den KidsLearning Lektionen
+      {% else %}
+        Welcome to KidsLearning lessons
+      {% endif %}
+    </h1>
+
+    <p class="lead">
+      {% if lang == "sr" %}
+        Gledajte zabavne časove i učite engleski korak po korak.
+      {% elif lang == "de" %}
+        Schau dir spannende Lektionen an und lerne Englisch Schritt für Schritt.
+      {% else %}
+        Watch fun lessons and learn English step by step.
+      {% endif %}
+    </p>
+  </div>
+</section>
+
+
+<div class="container py-5">
+
+  <!-- AGE GROUP FILTER -->
+  <div class="btn-group mb-4">
+
+    <a href="?lang={{ lang }}"
+       class="btn btn-outline-primary {% if not age_group %}active{% endif %}">
+      {% if lang == "sr" %}Sve{% elif lang == "de" %}Alle{% else %}All{% endif %}
+    </a>
+
+    <a href="{% url 'lesson_list_by_age' '4-5' %}?lang={{ lang }}"
+       class="btn btn-outline-primary {% if age_group == '4-5' %}active{% endif %}">
+      {% if lang == "sr" %}4–5 godina{% elif lang == "de" %}4–5 Jahre{% else %}4–5 years{% endif %}
+    </a>
+
+    <a href="{% url 'lesson_list_by_age' '6-7' %}?lang={{ lang }}"
+       class="btn btn-outline-primary {% if age_group == '6-7' %}active{% endif %}">
+      {% if lang == "sr" %}6–7 godina{% elif lang == "de" %}6–7 Jahre{% else %}6–7 years{% endif %}
+    </a>
+
+  </div>
+
+  <!-- LESSON CARDS -->
+  <div class="row">
+    {% for lesson in page_obj %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+
+          <!-- image -->
+          <a href="{% url 'lesson_detail' lesson.id %}?lang={{ lang }}">
+            {% if lesson.image %}
+              <img src="{{ lesson.image.url }}" class="card-img-top img-fluid"
+                   alt="{{ lesson|get_title:lang }}"
+                   style="max-height: 200px; object-fit: contain;">
+            {% else %}
+              <img src="{% static 'images/placeholder.png' %}" class="card-img-top img-fluid"
+                   alt="Lesson image"
+                   style="max-height: 200px; object-fit: contain;">
+            {% endif %}
+          </a>
+
+          <div class="card-body d-flex flex-column">
+
+            <!-- TITLE (translated) -->
+            <h5 class="card-title">
+              <a href="{% url 'lesson_detail' lesson.id %}?lang={{ lang }}"
+                 style="text-decoration: none; color: #333;">
+                {{ lesson|get_title:lang }}
+              </a>
+            </h5>
+
+            <!-- DESCRIPTION (translated) -->
+            <p class="card-text">{{ lesson|get_description:lang|truncatewords:20 }}</p>
+
+            <div class="mt-auto">
+              <a href="{% url 'lesson_detail' lesson.id %}?lang={{ lang }}"
+                 class="btn btn-primary w-100">
+                {% if lang == "sr" %}▶ Pogledaj čas
+                {% elif lang == "de" %}▶ Lektion ansehen
+                {% else %}▶ Watch Lesson
+                {% endif %}
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    {% empty %}
+      <p class="text-center mt-4">
+        {% if lang == "sr" %}Nema dostupnih časova.{% elif lang == "de" %}Keine Lektionen verfügbar.{% else %}No lessons available yet.{% endif %}
+      </p>
+    {% endfor %}
+  </div>
+</div>
+
+
+<!-- PAGINATION -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.previous_page_number }}&lang={{ lang }}">
+          {% if lang == "sr" %}Prethodna{% elif lang == "de" %}Zurück{% else %}Previous{% endif %}
+        </a>
+      </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+        <a class="page-link"
+           href="?page={{ num }}&lang={{ lang }}">{{ num }}</a>
+      </li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.next_page_number }}&lang={{ lang }}">
+          {% if lang == "sr" %}Sledeća{% elif lang == "de" %}Weiter{% else %}Next{% endif %}
+        </a>
+      </li>
+    {% endif %}
+
+  </ul>
+</nav>
+
+{% endblock %}

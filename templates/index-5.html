@@ -1,0 +1,781 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+    <!-- Hero / Banner – Kidslearning kids focus -->
+    <div class="rbt-banner-area rbt-banner-3 header-transperent-spacer">
+        <div class="wrapper">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-7 order-2 order-lg-1">
+                        <div class="banner-content">
+                            <div class="inner">
+                                <div class="section-title text-start">
+                                    <span class="subtitle bg-pink-opacity">
+                                        {% if lang == "sr" %}
+                                            RANI ENGLESKI ZA DECU
+                                        {% elif lang == "de" %}
+                                            FRÜHES ENGLISCH FÜR KINDER
+                                        {% else %}
+                                            EARLY ENGLISH FOR KIDS
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <h1 class="title">
+                                    {% if lang == "sr" %}
+                                        Razigrani engleski jezik za decu
+                                    {% elif lang == "de" %}
+                                        Spielerisches Englisch für Kinder
+                                    {% else %}
+                                        Fun English for Kids
+                                    {% endif %}
+                                </h1>
+                                <p class="description">
+                                    {% if lang == "sr" %}
+                                        Kratke video lekcije, zabavni kvizovi i radni listovi koji pomažu deci
+                                        uzrasta 4–9 godina da uče engleski korak po korak – kroz igru.
+                                    {% elif lang == "de" %}
+                                        Kurze Videolektionen, lustige Quizze und Arbeitsblätter helfen Kindern
+                                        von 4–9 Jahren Englisch Schritt für Schritt zu lernen – durch Spiel.
+                                    {% else %}
+                                        Short video lessons, fun quizzes and printable worksheets that help children
+                                        aged 4–9 learn English step by step – through play.
+                                    {% endif %}
+                                </p>
+
+                                <div class="rating mb--20">
+                                    <span class="me-2">
+                                        {% if lang == "sr" %}
+                                            Omiljeno među decom i roditeljima
+                                        {% elif lang == "de" %}
+                                            Beliebt bei Kindern &amp; Eltern
+                                        {% else %}
+                                            Loved by kids &amp; parents
+                                        {% endif %}
+                                    </span>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                </div>
+
+                                <div class="rbt-like-total">
+                                    <div class="profile-share">
+                                        <a href="#" class="avatar" tabindex="0">
+                                            <img src="{% static 'assets/images/testimonial/client-03.png' %}" alt="Happy learner">
+                                        </a>
+                                        <a href="#" class="avatar" tabindex="0">
+                                            <img src="{% static 'assets/images/testimonial/client-04.png' %}" alt="Happy learner">
+                                        </a>
+                                        <a href="#" class="avatar" tabindex="0">
+                                            <img src="{% static 'assets/images/testimonial/client-06.png' %}" alt="Happy learner">
+                                        </a>
+                                        <div class="more-author-text">
+                                            <h5 class="total-join-students">
+                                                {% if lang == "sr" %}
+                                                    Pridružite se malim učenicima širom sveta
+                                                {% elif lang == "de" %}
+                                                    Schließen Sie sich jungen Lernern auf der ganzen Welt an
+                                                {% else %}
+                                                    Join young learners around the world
+                                                {% endif %}
+                                            </h5>
+                                            <p class="subtitle">
+                                                {% if lang == "sr" %}
+                                                    Gledaj lekcije, igraj kvizove i štampaj radne listove.
+                                                {% elif lang == "de" %}
+                                                    Videos anschauen, Quizze spielen &amp; Arbeitsblätter ausdrucken.
+                                                {% else %}
+                                                    Watch lessons, play quizzes &amp; print worksheets.
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt--20">
+                                    <a class="rbt-btn btn-gradient radius-round me-2"
+                                       href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                        <span>
+                                            {% if lang == "sr" %}
+                                                Počni od lekcija
+                                            {% elif lang == "de" %}
+                                                Mit den Lektionen beginnen
+                                            {% else %}
+                                                Start with lessons
+                                            {% endif %}
+                                        </span>
+                                    </a>
+                                    <a class="rbt-btn btn-border-gradient radius-round"
+                                       href="http://localhost:3000/">
+                                        <span>
+                                            {% if lang == "sr" %}
+                                                Igraj kviz
+                                            {% elif lang == "de" %}
+                                                Ein Quiz spielen
+                                            {% else %}
+                                                Play a quiz
+                                            {% endif %}
+                                        </span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right-side image area if you want -->
+                </div>
+            </div>
+        </div>
+    <div class="shape-wrapper"> 
+        <div class="left-shape">
+             <img src="{% static 'assets/images/tablet.jpg' %}" alt="Banner Images"> 
+         </div>
+             <div class="top-shape">
+                <img src="{% static 'assets/images/banner/top-shape.png' %}" alt="Banner Images">
+             </div>
+              <div class="marque-images edumarque"></div> 
+        </div>    
+    </div>
+    <!-- End Banner Area -->
+
+
+    <!-- MAIN AREAS: Lessons / Quizzes / Resources / For Parents -->
+    <div class="rbt-categories-area bg-color-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <span class="subtitle bg-primary-opacity">
+                            {% if lang == "sr" %}
+                                Istraži KidsLearning
+                            {% elif lang == "de" %}
+                                Entdecke KidsLearning
+                            {% else %}
+                                Explore Kidslearning
+                            {% endif %}
+                        </span>
+                        <h2 class="title">
+                            {% if lang == "sr" %}
+                                Izaberite kako vaše dete želi da uči danas
+                            {% elif lang == "de" %}
+                                Wählen Sie, wie Ihr Kind heute lernen möchte
+                            {% else %}
+                                Choose how your child wants to learn today
+                            {% endif %}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5 mt--30">
+                <!-- Video Lessons -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="rbt-cat-box rbt-cat-box-1 variation-2 text-center">
+                        <div class="inner">
+                            <div class="thumbnail">
+                                <a href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                    <img src="{% static 'assets/images/videolessons.jpg' %}" alt="Video lessons">
+                                </a>
+                            </div>
+                            <div class="icons">
+                                <img src="{% static 'assets/images/category/web-design.png' %}" alt="Lessons icon">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">
+                                    <a href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                        {% if lang == "sr" %}
+                                            Video lekcije
+                                        {% elif lang == "de" %}
+                                            Video-Lektionen
+                                        {% else %}
+                                            Video Lessons
+                                        {% endif %}
+                                    </a>
+                                </h5>
+                                <p>
+                                    {% if lang == "sr" %}
+                                        Kratka i jednostavna objašnjenja za mlade učenike.
+                                    {% elif lang == "de" %}
+                                        Kurze, einfache Erklärungen für junge Lerner.
+                                    {% else %}
+                                        Short, simple explanations for young learners.
+                                    {% endif %}
+                                </p>
+                                <div class="read-more-btn">
+                                    <a class="rbt-btn-link" href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                        {% if lang == "sr" %}
+                                            Pregledaj lekcije
+                                        {% elif lang == "de" %}
+                                            Lektionen ansehen
+                                        {% else %}
+                                            Browse lessons
+                                        {% endif %}
+                                        <i class="feather-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quizzes & Games -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="rbt-cat-box rbt-cat-box-1 variation-2 text-center">
+                        <div class="inner">
+                            <div class="thumbnail">
+                                <a href="http://localhost:3000/">
+                                    <img src="{% static 'assets/images/quizzes.jpg' %}" alt="Quizzes and games">
+                                </a>
+                            </div>
+                            <div class="icons">
+                                <img src="{% static 'assets/images/category/graphic-designer.png' %}" alt="Games icon">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">
+                                    <a href="http://localhost:3000/">
+                                        {% if lang == "sr" %}
+                                            Kvizovi i igre
+                                        {% elif lang == "de" %}
+                                            Quizze &amp; Spiele
+                                        {% else %}
+                                            Quizzes &amp; Games
+                                        {% endif %}
+                                    </a>
+                                </h5>
+                                <p>
+                                    {% if lang == "sr" %}
+                                        Igraj povezivanje, prevlačenje, spelovanje i kvizove sa slikama.
+                                    {% elif lang == "de" %}
+                                        Spiele Zuordnungen, Drag-and-Drop, Rechtschreib- und Bild-Quizze.
+                                    {% else %}
+                                        Play matching, drag-and-drop, spelling and visual games.
+                                    {% endif %}
+                                </p>
+                                <div class="read-more-btn">
+                                    <a class="rbt-btn-link" href="http://localhost:3000/">
+                                        {% if lang == "sr" %}
+                                            Igraj sada
+                                        {% elif lang == "de" %}
+                                            Jetzt spielen
+                                        {% else %}
+                                            Play now
+                                        {% endif %}
+                                        <i class="feather-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Printable Worksheets -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="rbt-cat-box rbt-cat-box-1 variation-2 text-center">
+                        <div class="inner">
+                            <div class="thumbnail">
+                                <a href="{% url 'resources-home' %}?lang={{ lang }}">
+                                    <img src="{% static 'assets/images/pdfs.jpg' %}" alt="Printable worksheets">
+                                </a>
+                            </div>
+                            <div class="icons">
+                                <img src="{% static 'assets/images/category/personal.png' %}" alt="Worksheets icon">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">
+                                    <a href="{% url 'resources-home' %}?lang={{ lang }}">
+                                        {% if lang == "sr" %}
+                                            Radni listovi za štampu
+                                        {% elif lang == "de" %}
+                                            Arbeitsblätter zum Ausdrucken
+                                        {% else %}
+                                            Printable Worksheets
+                                        {% endif %}
+                                    </a>
+                                </h5>
+                                <p>
+                                    {% if lang == "sr" %}
+                                        Radni listovi za igru i vežbu kod kuće ili u učionici.
+                                    {% elif lang == "de" %}
+                                        Arbeitsblätter zum Spielen und Üben zu Hause oder im Unterricht.
+                                    {% else %}
+                                        Print-and-play practice sheets for home or classroom.
+                                    {% endif %}
+                                </p>
+                                <div class="read-more-btn">
+                                    <a class="rbt-btn-link" href="{% url 'resources-home' %}?lang={{ lang }}">
+                                        {% if lang == "sr" %}
+                                            Pogledaj radne listove
+                                        {% elif lang == "de" %}
+                                            Arbeitsblätter ansehen
+                                        {% else %}
+                                            View worksheets
+                                        {% endif %}
+                                        <i class="feather-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parents & Teachers -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="rbt-cat-box rbt-cat-box-1 variation-2 text-center">
+                        <div class="inner">
+                            <div class="thumbnail">
+                                <a href="{% url 'about' %}?lang={{ lang }}">
+                                    <img src="{% static 'assets/images/parents.jpg' %}" alt="Parents and teachers">
+                                </a>
+                            </div>
+                            <div class="icons">
+                                <img src="{% static 'assets/images/category/server.png' %}" alt="Parents icon">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">
+                                    <a href="{% url 'about' %}?lang={{ lang }}">
+                                        {% if lang == "sr" %}
+                                            Za roditelje i nastavnike
+                                        {% elif lang == "de" %}
+                                            Für Eltern &amp; Lehrkräfte
+                                        {% else %}
+                                            For Parents &amp; Teachers
+                                        {% endif %}
+                                    </a>
+                                </h5>
+                                <p>
+                                    {% if lang == "sr" %}
+                                        Saveti kako da koristite KidsLearning kod kuće i na času.
+                                    {% elif lang == "de" %}
+                                        Tipps, wie Sie KidsLearning zu Hause und im Unterricht nutzen können.
+                                    {% else %}
+                                        Tips on how to use Kidslearning in lessons and at home.
+                                    {% endif %}
+                                </p>
+                                <div class="read-more-btn">
+                                    <a class="rbt-btn-link" href="{% url 'about' %}?lang={{ lang }}">
+                                        {% if lang == "sr" %}
+                                            Saznaj više
+                                        {% elif lang == "de" %}
+                                            Mehr erfahren
+                                        {% else %}
+                                            Learn more
+                                        {% endif %}
+                                        <i class="feather-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optional view all -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="read-more-btn text-center mt--40">
+                        <a class="rbt-btn btn-border-gradient hover-icon-reverse radius-round btn-md"
+                           href="{% url 'index' %}?lang={{ lang }}">
+                            <div class="icon-reverse-wrapper">
+                                <span class="btn-text">
+                                    {% if lang == "sr" %}
+                                        PRIKAŽI SAV SADRŽAJ
+                                    {% elif lang == "de" %}
+                                        ALLE INHALTE ANZEIGEN
+                                    {% else %}
+                                        VIEW ALL CONTENT
+                                    {% endif %}
+                                </span>
+                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Feature section: what kids can do on the site -->
+    <div class="service-wrapper bg-color-white rbt-section-gap">
+        <div class="container">
+            <div class="row mb--60">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <span class="subtitle bg-pink-opacity">
+                            {% if lang == "sr" %}KidsLearning mogućnosti{% elif lang == "de" %}KidsLearning-Funktionen{% else %}Kidslearning Features{% endif %}
+                        </span>
+                        <h2 class="title">
+                            {% if lang == "sr" %}
+                                Neka engleski bude zabavan, jednostavan i razigran
+                            {% elif lang == "de" %}
+                                Mach Englischlernen einfach, spielerisch und spaßig
+                            {% else %}
+                                Make English fun, simple and playful
+                            {% endif %}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row row--15 mt_dec--30">
+
+                        <!-- Learn new words -->
+                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                            <div class="rbt-flipbox">
+                                <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-1">
+                                    <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                        <div class="icon">
+                                            <img src="{% static 'assets/images/icons/card-icon-1.png' %}" alt="card-icon">
+                                        </div>
+                                        <div class="content">
+                                            <h5 class="title">
+                                                <a href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                                    {% if lang == "sr" %}
+                                                        Nauči nove reči
+                                                    {% elif lang == "de" %}
+                                                        Neue Wörter lernen
+                                                    {% else %}
+                                                        Learn New Words
+                                                    {% endif %}
+                                                </a>
+                                            </h5>
+                                            <p>
+                                                {% if lang == "sr" %}
+                                                    Šarene lekcije za boje, životinje, školske stvari i još mnogo toga.
+                                                {% elif lang == "de" %}
+                                                    Bunte Lektionen zu Farben, Tieren, Schulsachen und mehr.
+                                                {% else %}
+                                                    Colourful lessons for colours, animals, school things and more.
+                                                {% endif %}
+                                            </p>
+                                            <a class="rbt-btn-link stretched-link"
+                                               href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                                {% if lang == "sr" %}Započni učenje{% elif lang == "de" %}Mit dem Lernen starten{% else %}Start learning{% endif %}
+                                                <i class="feather-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                        <ul class="rbt-list-style-3 color-white">
+                                            <li><i class="feather-book"></i>
+                                                {% if lang == "sr" %}Kratke lekcije po temama{% elif lang == "de" %}Kurze thematische Lektionen{% else %}Short topic-based lessons{% endif %}
+                                            </li>
+                                            <li><i class="feather-info"></i>
+                                                {% if lang == "sr" %}Jednostavan jezik za decu{% elif lang == "de" %}Einfache Sprache für Kinder{% else %}Simple language for kids{% endif %}
+                                            </li>
+                                            <li><i class="feather-video"></i>
+                                                {% if lang == "sr" %}Vizuelni primjeri i podrška{% elif lang == "de" %}Visuelle Beispiele &amp; Unterstützung{% else %}Visual support &amp; examples{% endif %}
+                                            </li>
+                                        </ul>
+                                        <a class="rbt-btn rbt-switch-btn btn-white btn-sm"
+                                           href="{% url 'lesson_list' %}?lang={{ lang }}">
+                                            <span data-text="{% if lang == 'sr' %}Pogledaj lekcije{% elif lang == 'de' %}Lektionen ansehen{% else %}View lessons{% endif %}">
+                                                {% if lang == "sr" %}Pogledaj lekcije{% elif lang == "de" %}Lektionen ansehen{% else %}View lessons{% endif %}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Practice with games -->
+                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                            <div class="rbt-flipbox">
+                                <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-2">
+                                    <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                        <div class="icon">
+                                            <img src="{% static 'assets/images/icons/card-icon-2.png' %}" alt="card-icon">
+                                        </div>
+                                        <div class="content">
+                                            <h5 class="title">
+                                                <a href="http://localhost:3000/">
+                                                    {% if lang == "sr" %}
+                                                        Igraj i vežbaj
+                                                    {% elif lang == "de" %}
+                                                        Spielen &amp; Üben
+                                                    {% else %}
+                                                        Play &amp; Practice
+                                                    {% endif %}
+                                                </a>
+                                            </h5>
+                                            <p>
+                                                {% if lang == "sr" %}
+                                                    Kvizovi povezivanja, prevlačenja, spelovanja i slike za decu.
+                                                {% elif lang == "de" %}
+                                                    Zuordnungs-, Drag-and-Drop-, Rechtschreib- und Bild-Quizze für Kinder.
+                                                {% else %}
+                                                    Matching, drag-and-drop, spelling and picture quizzes for kids.
+                                                {% endif %}
+                                            </p>
+                                            <a class="rbt-btn-link stretched-link" href="http://localhost:3000/">
+                                                {% if lang == "sr" %}Igraj igre{% elif lang == "de" %}Spiele spielen{% else %}Play games{% endif %}
+                                                <i class="feather-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                        <ul class="rbt-list-style-3 color-white">
+                                            <li><i class="feather-info"></i>
+                                                {% if lang == "sr" %}Različite vrste kvizova{% elif lang == "de" %}Verschiedene Quiz-Typen{% else %}Different quiz types{% endif %}
+                                            </li>
+                                            <li><i class="feather-users"></i>
+                                                {% if lang == "sr" %}Odlično za učionicu i dom{% elif lang == "de" %}Ideal für Schule &amp; Zuhause{% else %}Great for classroom or home{% endif %}
+                                            </li>
+                                            <li><i class="feather-youtube"></i>
+                                                {% if lang == "sr" %}Prati teme iz lekcija{% elif lang == "de" %}Passt zu den Lektionsthemen{% else %}Supports lesson topics{% endif %}
+                                            </li>
+                                        </ul>
+                                        <a class="rbt-btn rbt-switch-btn btn-white btn-sm" href="http://localhost:3000/">
+                                            <span data-text="{% if lang == 'sr' %}Igraj sada{% elif lang == 'de' %}Jetzt spielen{% else %}Play now{% endif %}">
+                                                {% if lang == "sr" %}Igraj sada{% elif lang == "de" %}Jetzt spielen{% else %}Play now{% endif %}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Printables -->
+                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                            <div class="rbt-flipbox">
+                                <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-3">
+                                    <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                        <div class="icon">
+                                            <img src="{% static 'assets/images/icons/card-icon-3.png' %}" alt="card-icon">
+                                        </div>
+                                        <div class="content">
+                                            <h5 class="title">
+                                                <a href="{% url 'resources-home' %}?lang={{ lang }}">
+                                                    {% if lang == "sr" %}
+                                                        Štampaj i boj
+                                                    {% elif lang == "de" %}
+                                                        Ausdrucken &amp; Ausmalen
+                                                    {% else %}
+                                                        Print &amp; Colour
+                                                    {% endif %}
+                                                </a>
+                                            </h5>
+                                            <p>
+                                                {% if lang == "sr" %}
+                                                    Radni listovi za štampu, bojanke i jednostavni zadaci za vežbu.
+                                                {% elif lang == "de" %}
+                                                    Arbeitsblätter zum Ausdrucken, Malvorlagen und einfache Übungen.
+                                                {% else %}
+                                                    Printable worksheets, colouring pages and simple tasks for practice.
+                                                {% endif %}
+                                            </p>
+                                            <a class="rbt-btn-link stretched-link"
+                                               href="{% url 'resources-home' %}?lang={{ lang }}">
+                                                {% if lang == "sr" %}Preuzmi PDF-ove{% elif lang == "de" %}PDFs herunterladen{% else %}Download PDFs{% endif %}
+                                                <i class="feather-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                        <ul class="rbt-list-style-3 color-white">
+                                            <li><i class="feather-book"></i>
+                                                {% if lang == "sr" %}Radni listovi po temama{% elif lang == "de" %}Arbeitsblätter nach Themen{% else %}Worksheets by topic{% endif %}
+                                            </li>
+                                            <li><i class="feather-info"></i>
+                                                {% if lang == "sr" %}Idealno za domaći{% elif lang == "de" %}Ideal für Hausaufgaben{% else %}Ideal for homework{% endif %}
+                                            </li>
+                                            <li><i class="feather-printer"></i>
+                                                {% if lang == "sr" %}Lako za štampu i korišćenje{% elif lang == "de" %}Einfach zu drucken &amp; zu nutzen{% else %}Easy to print &amp; use{% endif %}
+                                            </li>
+                                        </ul>
+                                        <a class="rbt-btn rbt-switch-btn btn-white btn-sm"
+                                           href="{% url 'resources-home' %}?lang={{ lang }}">
+                                            <span data-text="{% if lang == 'sr' %}Pogledaj resurse{% elif lang == 'de' %}Ressourcen ansehen{% else %}View resources{% endif %}">
+                                                {% if lang == "sr" %}Pogledaj resurse{% elif lang == "de" %}Ressourcen ansehen{% else %}View resources{% endif %}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress & fun -->
+                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 mt--30">
+                            <div class="rbt-flipbox">
+                                <div class="rbt-flipbox-wrap rbt-service rbt-service-1 card-bg-4">
+                                    <div class="rbt-flipbox-front rbt-flipbox-face inner">
+                                        <div class="icon">
+                                            <img src="{% static 'assets/images/icons/card-icon-4.png' %}" alt="card-icon">
+                                        </div>
+                                        <div class="content">
+                                            <h5 class="title"><a href="#">
+                                                {% if lang == "sr" %}
+                                                    Razigrani napredak
+                                                {% elif lang == "de" %}
+                                                    Spielerischer Fortschritt
+                                                {% else %}
+                                                    Playful Progress
+                                                {% endif %}
+                                            </a></h5>
+                                            <p>
+                                                {% if lang == "sr" %}
+                                                    Sadržaj korak po korak, tako da se deca ponose svakim malim uspehom.
+                                                {% elif lang == "de" %}
+                                                    Inhalte Schritt für Schritt, damit Kinder auf jeden kleinen Erfolg stolz sind.
+                                                {% else %}
+                                                    Step-by-step content so kids feel proud of every small success.
+                                                {% endif %}
+                                            </p>
+                                            <a class="rbt-btn-link stretched-link" href="#">
+                                                {% if lang == "sr" %}Saznaj više{% elif lang == "de" %}Mehr erfahren{% else %}Learn more{% endif %}
+                                                <i class="feather-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="rbt-flipbox-back rbt-flipbox-face inner">
+                                        <ul class="rbt-list-style-3 color-white">
+                                            <li><i class="feather-smile"></i>
+                                                {% if lang == "sr" %}Dizajnirano za decu{% elif lang == "de" %}Kindgerechtes Design{% else %}Kid-friendly design{% endif %}
+                                            </li>
+                                            <li><i class="feather-star"></i>
+                                                {% if lang == "sr" %}Slavimo dostignuća{% elif lang == "de" %}Erfolge feiern{% else %}Celebrate achievements{% endif %}
+                                            </li>
+                                            <li><i class="feather-heart"></i>
+                                                {% if lang == "sr" %}Fokus na samopouzdanju{% elif lang == "de" %}Fokus auf Selbstvertrauen{% else %}Focus on confidence{% endif %}
+                                            </li>
+                                        </ul>
+                                        <a class="rbt-btn rbt-switch-btn btn-white btn-sm" href="#">
+                                            <span data-text="{% if lang == 'sr' %}Uskoro{% elif lang == 'de' %}Demnächst{% else %}Coming soon{% endif %}">
+                                                {% if lang == "sr" %}Uskoro{% elif lang == "de" %}Demnächst{% else %}Coming soon{% endif %}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Cards -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Blog section → tips for parents / ideas -->
+    <div class="rbt-rbt-blog-area bg-color-white rbt-section-gapBottom">
+        <div class="container">
+            <div class="row mb--30 g-5 align-items-end">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="section-title text-start">
+                        <span class="subtitle bg-primary-opacity">
+                            {% if lang == "sr" %}Za roditelje i nastavnike{% elif lang == "de" %}Für Eltern &amp; Lehrkräfte{% else %}For Parents &amp; Teachers{% endif %}
+                        </span>
+                        <h2 class="title">
+                            {% if lang == "sr" %}KidsLearning ideje i saveti{% elif lang == "de" %}KidsLearning-Ideen &amp; Tipps{% else %}Kidslearning ideas &amp; tips{% endif %}
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="read-more-btn text-start text-md-end">
+                        <a class="rbt-btn btn-gradient hover-icon-reverse radius-round" href="{% url 'blog_list' %}?lang={{ lang }}">
+                            <div class="icon-reverse-wrapper">
+                                <span class="btn-text">
+                                    {% if lang == "sr" %}PRIKAŽI SVE TEKSTOVE{% elif lang == "de" %}ALLE ARTIKEL ANZEIGEN{% else %}VIEW ALL ARTICLES{% endif %}
+                                </span>
+                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Area -->
+           {% if posts %}
+<div class="row row--15">
+
+  {# big first card #}
+  {% with p=posts.0 %}
+  <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt--30">
+    <div class="rbt-card variation-02 height-330 rbt-hover">
+      <div class="rbt-card-img">
+        <a href="{% url 'blog_detail' p.slug %}?lang={{ lang }}">
+          {% if p.image %}
+            <img src="{{ p.image.url }}" alt="">
+          {% else %}
+            <img src="{% static 'assets/images/blog/blog-card-01.jpg' %}" alt="">
+          {% endif %}
+        </a>
+      </div>
+      <div class="rbt-card-body">
+        <h3 class="rbt-card-title">
+          <a href="{% url 'blog_detail' p.slug %}?lang={{ lang }}">
+            {% if lang == "sr" and p.title_sr %}{{ p.title_sr }}
+            {% elif lang == "de" and p.title_de %}{{ p.title_de }}
+            {% else %}{{ p.title_en }}{% endif %}
+          </a>
+        </h3>
+
+        <p class="rbt-card-text">
+          {% if lang == "sr" and p.summary_sr %}{{ p.summary_sr|truncatechars:140 }}
+          {% elif lang == "de" and p.summary_de %}{{ p.summary_de|truncatechars:140 }}
+          {% else %}{{ p.summary_en|truncatechars:140 }}{% endif %}
+        </p>
+
+        <div class="rbt-card-bottom">
+          <a class="transparent-button" href="{% url 'blog_detail' p.slug %}?lang={{ lang }}">
+            {% if lang == "sr" %}Pročitaj tekst{% elif lang == "de" %}Artikel lesen{% else %}Read article{% endif %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endwith %}
+
+  {# small list cards #}
+  <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt--30">
+    {% for p in posts|slice:"1:" %}
+      <div class="rbt-card card-list variation-02 rbt-hover {% if not forloop.first %}mt--30{% endif %}">
+        <div class="rbt-card-img">
+          <a href="{% url 'blog_detail' p.slug %}?lang={{ lang }}">
+            {% if p.image %}
+              <img src="{{ p.image.url }}" alt="">
+            {% else %}
+              <img src="{% static 'assets/images/blog/blog-card-02.jpg' %}" alt="">
+            {% endif %}
+          </a>
+        </div>
+        <div class="rbt-card-body">
+          <h5 class="rbt-card-title">
+            <a href="{% url 'blog_detail' p.slug %}?lang={{ lang }}">
+              {% if lang == "sr" and p.title_sr %}{{ p.title_sr }}
+              {% elif lang == "de" and p.title_de %}{{ p.title_de }}
+              {% else %}{{ p.title_en }}{% endif %}
+            </a>
+          </h5>
+          <div class="rbt-card-bottom">
+            <a class="transparent-button" href="{% url 'blog_detail' p.slug %}?lang={{ lang }}">
+              {% if lang == "sr" %}Pročitaj tekst{% elif lang == "de" %}Artikel lesen{% else %}Read article{% endif %}
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endif %}
+
+            <!-- End Card Area -->
+        </div>
+    </div>
+
+   
+
+
+{% endblock content %}
+

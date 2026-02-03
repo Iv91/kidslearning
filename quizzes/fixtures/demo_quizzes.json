@@ -1,0 +1,215 @@
+[
+    {
+        "model": "quizzes.quiz",
+        "pk": 8,
+        "fields": {
+            "title": "Colours – Audio Quiz",
+            "lesson": 1,
+            "quiz_type": "audio",
+            "difficulty": "easy",
+            "cover_image": "quiz_covers/colours_audio.jpg",
+            "created_at": "2026-01-20T08:20:00Z"
+        }
+    },
+    {
+        "model": "quizzes.audioquizquestion",
+        "pk": 301,
+        "fields": {
+            "quiz": 8,
+            "image": "audio_quiz_images/blue.png",
+            "correct_answer": "Blue"
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3001,
+        "fields": {
+            "question": 301,
+            "text": "Blue",
+            "audio_file": "audio_quiz_options/blue.mp3",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3002,
+        "fields": {
+            "question": 301,
+            "text": "Red",
+            "audio_file": "audio_quiz_options/red.mp3",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3003,
+        "fields": {
+            "question": 301,
+            "text": "Green",
+            "audio_file": "audio_quiz_options/green.mp3",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.audioquizquestion",
+        "pk": 302,
+        "fields": {
+            "quiz": 8,
+            "image": "audio_quiz_images/red.png",
+            "correct_answer": "Red"
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3011,
+        "fields": {
+            "question": 302,
+            "text": "Blue",
+            "audio_file": "audio_quiz_options/blue.mp3",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3012,
+        "fields": {
+            "question": 302,
+            "text": "Red",
+            "audio_file": "audio_quiz_options/red.mp3",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3013,
+        "fields": {
+            "question": 302,
+            "text": "Green",
+            "audio_file": "audio_quiz_options/green.mp3",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.audioquizquestion",
+        "pk": 303,
+        "fields": {
+            "quiz": 8,
+            "image": "audio_quiz_images/green.png",
+            "correct_answer": "Green"
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3021,
+        "fields": {
+            "question": 303,
+            "text": "Blue",
+            "audio_file": "audio_quiz_options/blue.mp3",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3022,
+        "fields": {
+            "question": 303,
+            "text": "Red",
+            "audio_file": "audio_quiz_options/red.mp3",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.audioquizoption",
+        "pk": 3023,
+        "fields": {
+            "question": 303,
+            "text": "Green",
+            "audio_file": "audio_quiz_options/green.mp3",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "quizzes.quiz",
+        "pk": 6,
+        "fields": {
+            "title": "Colours – Multiple Choice",
+            "lesson": 1,
+            "quiz_type": "multiple_choice",
+            "difficulty": "easy",
+            "cover_image": "quiz_covers/colours_mc.jpg",
+            "created_at": "2026-01-20T08:15:00Z"
+        }
+    },
+    {
+        "model": "quizzes.question",
+        "pk": 600,
+        "fields": {
+            "quiz": 6,
+            "text": "What color is the sky on a clear day?",
+            "order": 1
+        }
+    },
+    {
+        "model": "quizzes.question",
+        "pk": 601,
+        "fields": {
+            "quiz": 6,
+            "text": "What color is a banana?",
+            "order": 2
+        }
+    },
+    {
+        "model": "quizzes.option",
+        "pk": 700,
+        "fields": {
+            "question": 600,
+            "text": "Blue",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "quizzes.option",
+        "pk": 701,
+        "fields": {
+            "question": 600,
+            "text": "Red",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.option",
+        "pk": 702,
+        "fields": {
+            "question": 600,
+            "text": "Green",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.option",
+        "pk": 710,
+        "fields": {
+            "question": 601,
+            "text": "Yellow",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "quizzes.option",
+        "pk": 711,
+        "fields": {
+            "question": 601,
+            "text": "Purple",
+            "is_correct": false
+        }
+    },
+    {
+        "model": "quizzes.option",
+        "pk": 712,
+        "fields": {
+            "question": 601,
+            "text": "Black",
+            "is_correct": false
+        }
+    }
+]

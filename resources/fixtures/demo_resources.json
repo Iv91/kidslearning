@@ -1,0 +1,14 @@
+[
+    {
+        "model": "resources.worksheet",
+        "pk": 1001,
+        "fields": {
+            "title": "Colours – Printable Worksheet",
+            "description": "A simple printable worksheet to practice basic colours: colour the circles, match the words, and circle the correct answer.",
+            "lesson": 1,
+            "file": "resources/colours_worksheet.pdf",
+            "image": "resources_images/colours_worksheet_cover.png",
+            "uploaded_at": "2026-01-20T08:20:00Z"
+        }
+    }
+]

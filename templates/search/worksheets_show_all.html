@@ -1,0 +1,72 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if lang == "sr" %}Svi radni listovi - KidsLearning
+  {% elif lang == "de" %}Alle Arbeitsblätter - KidsLearning
+  {% else %}All Worksheets - KidsLearning
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="height:150px;"></div>
+
+<div class="container my-4">
+
+  <!-- Title -->
+  <h3 class="mb-4">
+    {% if lang == "sr" %}📝 Svi radni listovi
+    {% elif lang == "de" %}📝 Alle Arbeitsblätter
+    {% else %}📝 All Worksheets{% endif %}
+
+    {% if query %}
+      <small class="text-muted">
+        {% if lang == "sr" %}za „{{ query }}“{% elif lang == "de" %}für „{{ query }}“{% else %}for "{{ query }}"{% endif %}
+      </small>
+    {% endif %}
+  </h3>
+
+  <div class="row">
+    {% for worksheet in worksheets %}
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card h-100 shadow-sm">
+
+          <!-- Image -->
+          {% if worksheet.image %}
+            <img src="{{ worksheet.image.url }}"
+                 class="card-img-top"
+                 alt="{{ worksheet.title }}"
+                 style="height:150px; object-fit:contain;">
+          {% else %}
+            <img src="{% static 'assets/images/placeholders/worksheet.png' %}"
+                 class="card-img-top"
+                 alt="Worksheet"
+                 style="height:150px; object-fit:contain;">
+          {% endif %}
+
+          <div class="card-body text-center">
+            <h6 class="card-title">{{ worksheet.title }}</h6>
+
+            <a href="{{ worksheet.file.url }}" download class="btn btn-sm btn-success">
+              {% if lang == "sr" %}📥 Preuzmi{% elif lang == "de" %}📥 Herunterladen{% else %}📥 Download{% endif %}
+            </a>
+
+            <a href="{% url 'resource_detail' worksheet.id %}?lang={{ lang }}"
+               class="btn btn-sm btn-outline-primary mt-2">
+              {% if lang == "sr" %}👀 Detalji
+              {% elif lang == "de" %}👀 Details
+              {% else %}👀 View Details{% endif %}
+            </a>
+          </div>
+        </div>
+      </div>
+
+    {% empty %}
+      <p class="text-center">
+        {% if lang == "sr" %}Nema dostupnih radnih listova.{% elif lang == "de" %}Keine verfügbaren Arbeitsblätter.{% else %}No worksheets available.{% endif %}
+      </p>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

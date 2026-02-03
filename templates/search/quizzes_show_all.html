@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container my-4">
+  <h3 class="mb-4">🎮 All Quizzes ({{ quizzes_count }})</h3>
+  <div class="row">
+    {% for quiz in quizzes %}
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          {% if quiz.cover_image %}
+            <img src="{{ quiz.cover_image.url }}" class="card-img-top" alt="{{ quiz.title }}" style="height:150px; object-fit:contain;">
+          {% else %}
+            <img src="{% static 'assets/images/placeholders/quiz.png' %}" class="card-img-top" alt="Quiz">
+          {% endif %}
+          <div class="card-body text-center">
+            <h6 class="card-title">{{ quiz.title }}</h6>
+            <a href="{% url 'quiz_page' quiz.id %}" class="btn btn-sm btn-success">Play</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No quizzes available.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

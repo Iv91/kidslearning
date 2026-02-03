@@ -1,0 +1,49 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="rbt-section-gap bg-color-white blog-page-offset">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <article class="blog-detail">
+
+                    {# ---- TITLE ---- #}
+                    <h1 class="mb--20">
+                        {% if lang == "sr" and post.title_sr %}
+                            {{ post.title_sr }}
+                        {% elif lang == "de" and post.title_de %}
+                            {{ post.title_de }}
+                        {% else %}
+                            {{ post.title_en }}
+                        {% endif %}
+                    </h1>
+
+                    {# ---- IMAGE ---- #}
+                    {% if post.image %}
+                        <img
+                            src="{{ post.image.url }}"
+                            alt="{{ post.title_en }}"
+                            class="blog-detail-image"
+                        >
+                    {% endif %}
+
+                    {# ---- CONTENT ---- #}
+                    <div class="blog-content">
+                        {% if lang == "sr" and post.content_sr %}
+                            {{ post.content_sr|safe }}
+                        {% elif lang == "de" and post.content_de %}
+                            {{ post.content_de|safe }}
+                        {% else %}
+                            {{ post.content_en|safe }}
+                        {% endif %}
+                    </div>
+
+                </article>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

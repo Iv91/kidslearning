@@ -1,0 +1,96 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if lang == "sr" %}Kontakt - KidsLearning
+  {% elif lang == "de" %}Kontakt - KidsLearning
+  {% else %}Contact - KidsLearning
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="height:150px;"></div>
+
+<section class="page-header text-center py-5" style="background-color:#eaf8fa;">
+  <h1 class="fw-bold">
+    {% if lang == "sr" %}📬 Kontaktirajte KidsLearning
+    {% elif lang == "de" %}📬 Kontakt KidsLearning
+    {% else %}📬 Contact KidsLearning{% endif %}
+  </h1>
+
+  <p class="lead">
+    {% if lang == "sr" %}Pišite nam! Roditelji, učitelji i mali učenici — svi su dobrodošli. 🌈
+    {% elif lang == "de" %}Schreib uns gerne! Eltern, Lehrer und kleine Lernende sind herzlich willkommen. 🌈
+    {% else %}We’d love to hear from you! Parents, teachers, and learners are all welcome to reach out. 🌈{% endif %}
+  </p>
+</section>
+
+<div class="container py-5">
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} text-center" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-5">
+
+          <form method="post" action="{% url 'contact' %}?lang={{ lang }}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label">
+                {% if lang == "sr" %}Vaše ime
+                {% elif lang == "de" %}Dein Name
+                {% else %}Your Name{% endif %}
+              </label>
+              <input type="text" name="name" class="form-control"
+                     placeholder="{% if lang == 'sr' %}Unesite ime{% elif lang == 'de' %}Name eingeben{% else %}Enter your name{% endif %}"
+                     required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">
+                {% if lang == "sr" %}Vaš email
+                {% elif lang == "de" %}Deine E-Mail
+                {% else %}Your Email{% endif %}
+              </label>
+              <input type="email" name="email" class="form-control"
+                     placeholder="{% if lang == 'sr' %}Unesite email{% elif lang == 'de' %}E-Mail eingeben{% else %}Enter your email{% endif %}"
+                     required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">
+                {% if lang == "sr" %}Poruka
+                {% elif lang == "de" %}Nachricht
+                {% else %}Message{% endif %}
+              </label>
+              <textarea name="message" class="form-control" rows="5"
+                        placeholder="{% if lang == 'sr' %}Napišite poruku...{% elif lang == 'de' %}Schreibe deine Nachricht...{% else %}Write your message...{% endif %}"
+                        required></textarea>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary px-4 py-2" style="border-radius:50px;">
+                {% if lang == "sr" %}✉️ Pošalji poruku
+                {% elif lang == "de" %}✉️ Nachricht senden
+                {% else %}✉️ Send Message{% endif %}
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+     
+    </div>
+  </div>
+</div>
+{% endblock %}
+

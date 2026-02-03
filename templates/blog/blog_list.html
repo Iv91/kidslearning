@@ -1,0 +1,95 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Blog Header -->
+<div class="rbt-section-gap bg-color-white blog-page-offset">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+
+                <span class="subtitle bg-primary-opacity">
+                    {% if lang == "sr" %}Za roditelje i nastavnike
+                    {% elif lang == "de" %}Für Eltern &amp; Lehrkräfte
+                    {% else %}For Parents &amp; Teachers{% endif %}
+                </span>
+
+                <h1 class="title mt--10">
+                    {% if lang == "sr" %}KidsLearning ideje i saveti
+                    {% elif lang == "de" %}KidsLearning-Ideen &amp; Tipps
+                    {% else %}KidsLearning ideas &amp; tips{% endif %}
+                </h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog List -->
+<div class="rbt-section-gapBottom bg-color-white">
+    <div class="container">
+        <div class="row row--15">
+
+            {% for post in posts %}
+            <div class="col-lg-4 col-md-6 col-12 mt--30">
+                <div class="rbt-card variation-02 rbt-hover">
+
+                    <div class="rbt-card-img">
+                        <a href="{% url 'blog_detail' post.slug %}?lang={{ lang }}">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" alt="{{ post.title_en }}">
+                            {% else %}
+                                <img src="{% static 'assets/images/blog/blog-card-01.jpg' %}" alt="Blog">
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <div class="rbt-card-body">
+                        <h5 class="rbt-card-title">
+                            <a href="{% url 'blog_detail' post.slug %}?lang={{ lang }}">
+                                {% if lang == "sr" and post.title_sr %}{{ post.title_sr }}
+                                {% elif lang == "de" and post.title_de %}{{ post.title_de }}
+                                {% else %}{{ post.title_en }}{% endif %}
+                            </a>
+                        </h5>
+
+                        <p class="rbt-card-text">
+                            {% if lang == "sr" and post.summary_sr %}{{ post.summary_sr|truncatechars:140 }}
+                            {% elif lang == "de" and post.summary_de %}{{ post.summary_de|truncatechars:140 }}
+                            {% else %}{{ post.summary_en|truncatechars:140 }}{% endif %}
+                        </p>
+
+                        <div class="rbt-card-bottom">
+                            <a class="transparent-button"
+                               href="{% url 'blog_detail' post.slug %}?lang={{ lang }}">
+                                {% if lang == "sr" %}Pročitaj tekst
+                                {% elif lang == "de" %}Artikel lesen
+                                {% else %}Read article{% endif %}
+                                <i>
+                                    <svg width="17" height="12" xmlns="http://www.w3.org/2000/svg">
+                                        <g stroke="#27374D" fill="none" fill-rule="evenodd">
+                                            <path d="M10.614 0l5.629 5.629-5.63 5.629" />
+                                            <path stroke-linecap="square" d="M.663 5.572h14.594" />
+                                        </g>
+                                    </svg>
+                                </i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>No articles yet.</p>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

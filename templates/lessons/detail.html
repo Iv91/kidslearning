@@ -1,0 +1,481 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load lesson_translations %}
+
+{% block content %}
+<div style="padding: 10rem 2rem; background-color: #ddd9e3; min-height: 100vh;">
+  <div style="max-width: 900px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+
+    <!-- Title -->
+    <h1 style="color: #333; margin-bottom: 0.5rem;">
+      {{ lesson|get_title:lang }}
+    </h1>
+
+    <p style="color: #777; font-size: 1.1rem;">
+      <strong>
+        {% if lang == "sr" %}Tema:
+        {% elif lang == "de" %}Thema:
+        {% else %}Topic:{% endif %}
+      </strong>
+      {{ lesson.category.name }}
+    </p>
+
+    <!-- Description -->
+    <div style="margin-top: 1.5rem; line-height: 1.6; color: #444;">
+      <p>{{ lesson|get_description:lang }}</p>
+    </div>
+
+    {# ------------------------------ #}
+    {# 🎬 Lesson Video(s) / Blocks     #}
+    {# blocks first, main lesson last #}
+    {# ------------------------------ #}
+
+    {% with blocks=lesson.blocks.all %}
+      {% if blocks|length > 0 or lesson.video_file %}
+        <div style="margin-top: 2rem;">
+
+          <!-- Player -->
+          <div class="custom-video-container">
+            <video id="lessonVideo" controls preload="metadata"
+                   poster="{% if lesson.image %}{{ lesson.image.url }}{% else %}{% static 'images/video-placeholder.jpg' %}{% endif %}">
+              {# default source will be set by JS (playlist). keep a safe fallback #}
+              {% if blocks|length > 0 and blocks.0.video %}
+                <source id="lessonVideoSource" src="{{ blocks.0.video.url }}" type="video/mp4">
+              {% elif lesson.video_file %}
+                <source id="lessonVideoSource" src="{{ lesson.video_file.url }}" type="video/mp4">
+              {% else %}
+                <source id="lessonVideoSource" src="" type="video/mp4">
+              {% endif %}
+              Your browser does not support the video tag.
+            </video>
+            <div class="custom-play-overlay" onclick="startLessonFromOverlay()">▶</div>
+          </div>
+
+          <!-- Lesson Parts -->
+          <div style="margin-top: 1rem;">
+            <h3 style="margin: 0.5rem 0; color:#333;">
+              {% if lang == "sr" %}🎞 Delovi lekcije
+              {% elif lang == "de" %}🎞 Lektionsteile
+              {% else %}🎞 Lesson Parts{% endif %}
+            </h3>
+
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+
+              {# BLOCK BUTTONS FIRST #}
+              {% for b in blocks %}
+                {% if b.video %}
+                  <button
+                    type="button"
+                    class="block-btn"
+                    data-idx="{{ forloop.counter0 }}"
+                    onclick="playAtIndex({{ forloop.counter0 }}, this)"
+                  >
+                    {{ b|get_block_title:lang }}
+                  </button>
+                {% endif %}
+              {% endfor %}
+
+              {# MAIN LESSON BUTTON LAST #}
+              {% if lesson.video_file %}
+                <button
+                  type="button"
+                  class="block-btn"
+                  id="mainLessonBtn"
+                  onclick="playMainLesson(this)"
+                >
+                  🎬
+                  {% if lang == "sr" %}Glavna lekcija
+                  {% elif lang == "de" %}Hauptlektion
+                  {% else %}Main lesson{% endif %}
+                </button>
+              {% endif %}
+            </div>
+
+            <p id="nowPlayingText" style="margin-top: 0.8rem; color:#777; font-size: 0.95rem;"></p>
+          </div>
+
+        </div>
+
+      {% elif lesson.video_url %}
+        <!-- ✅ YouTube / external iframe -->
+        <div style="margin-top: 2rem;">
+          <div style="position:relative; padding-top:56.25%; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.15);">
+            <iframe
+              src="{{ lesson.embed_video_url }}"
+              title="Lesson video"
+              style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Quizzes Section -->
+    <div style="margin-top: 3rem;">
+      <h3 style="color: #2e7d32;">
+        {% if lang == "sr" %}🧠 Kvizovi za vežbu
+        {% elif lang == "de" %}🧠 Übungsquizze
+        {% else %}🧠 Practice Quizzes{% endif %}
+      </h3>
+
+      {% if related_quizzes %}
+        <ul style="list-style: none; padding: 0;">
+          {% for quiz in related_quizzes %}
+            <li style="margin: 10px 0;">
+              {% if quiz.quiz_type == "matching" %}
+                <a href="http://localhost:3000/matching-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+              {% elif quiz.quiz_type == "visual" %}
+                <a href="http://localhost:3000/visual-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+              {% elif quiz.quiz_type == "drag_drop" %}
+                <a href="http://localhost:3000/drag-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+              {% elif quiz.quiz_type == "audio" %}
+                <a href="http://localhost:3000/audio-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+              {% else %}
+                <a href="http://localhost:3000/quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p style="color: #999;">
+          {% if lang == "sr" %}
+            Još nema povezanih kvizova za ovu lekciju.
+          {% elif lang == "de" %}
+            Es gibt noch keine Quizze zu dieser Lektion.
+          {% else %}
+            No quizzes connected to this lesson yet.
+          {% endif %}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Resources Section -->
+    <div style="margin-top: 3rem;">
+      <h3 style="color: #1a73e8;">
+        {% if lang == "sr" %}📄 Radni listovi i materijali
+        {% elif lang == "de" %}📄 Arbeitsblätter & Materialien
+        {% else %}📄 Downloadable Resources{% endif %}
+      </h3>
+
+      {% if lesson.resources.all %}
+        <div class="resource-grid">
+          {% for res in lesson.resources.all %}
+            <div class="resource-card">
+              <h4>{{ res.title }}</h4>
+              <a href="{{ res.file.url }}" download class="download-btn">
+                {% if lang == "sr" %}⬇ Preuzmi
+                {% elif lang == "de" %}⬇ Herunterladen
+                {% else %}⬇ Download{% endif %}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p style="color: #999;">
+          {% if lang == "sr" %}
+            Još nema materijala za preuzimanje.
+          {% elif lang == "de" %}
+            Es gibt još keine Materialien zum Herunterladen.
+          {% else %}
+            No resources yet.
+          {% endif %}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Back Link -->
+    <div style="margin-top: 3rem;">
+      <a href="{% url 'lesson_list_by_age' lesson.age_group %}?lang={{ lang }}"
+         class="back-link">
+        {% if lang == "sr" %}← Nazad na lekcije
+        {% elif lang == "de" %}← Zurück zu den Lektionen
+        {% else %}← Back to Lessons{% endif %}
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- 🌈 Styling (unchanged, but keep main lesson button highlight) -->
+<style>
+.custom-video-container {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  background: #f0f0f0;
+  padding: 1rem;
+}
+
+.custom-video-container video {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+  border-radius: 10px;
+}
+
+/* 🎬 Play Overlay */
+.custom-play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 3rem;
+  border-radius: 50%;
+  padding: 10px 25px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+.custom-play-overlay:hover {
+  background: rgba(76, 175, 80, 0.8);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Lesson parts buttons */
+.block-btn{
+  border: 1px solid #ddd;
+  background: #f8f8fb;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.block-btn:hover{
+  background: #eef7ff;
+  border-color: #b7d6ff;
+}
+.block-btn.active{
+  background: #dff3e2;
+  border-color: #4CAF50;
+}
+
+/* Highlight main lesson button */
+#mainLessonBtn{
+  background: #fff3cd;
+  border-color: #ffecb5;
+}
+#mainLessonBtn.active{
+  background: #ffe082;
+  border-color: #ffca28;
+}
+
+/* --- Quizzes & Resources Styling --- */
+.quiz-link {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+.quiz-link:hover {
+  border-bottom: 2px solid #4CAF50;
+}
+
+.resource-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.resource-card {
+  background: #f5f9ff;
+  border: 1px solid #dce6f7;
+  padding: 1rem;
+  border-radius: 10px;
+  width: calc(50% - 1rem);
+  text-align: center;
+  transition: transform 0.2s;
+}
+.resource-card:hover {
+  transform: translateY(-5px);
+}
+.download-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.download-btn:hover {
+  background-color: #43a047;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #1a73e8;
+  font-weight: bold;
+}
+.back-link:hover {
+  color: #0b5ed7;
+}
+
+@media (max-width: 768px) {
+  .resource-card { width: 100%; }
+}
+</style>
+
+<!-- 🎥 JS: autoplay next, blocks first, main last -->
+<script>
+let PLAYLIST = [];
+let CURRENT_INDEX = 0;
+let STARTED = false;
+
+function setActiveButton(btnEl) {
+  document.querySelectorAll('.block-btn').forEach(btn => btn.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+}
+
+function hideOverlay() {
+  const overlay = document.querySelector('.custom-play-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+function showOverlay() {
+  const overlay = document.querySelector('.custom-play-overlay');
+  if (overlay) overlay.style.display = 'block';
+}
+
+function updateNowPlaying() {
+  const el = document.getElementById('nowPlayingText');
+  if (!el) return;
+
+  if (!PLAYLIST.length) {
+    el.textContent = "No videos available.";
+    return;
+  }
+  const item = PLAYLIST[CURRENT_INDEX];
+  el.textContent = `Now playing: ${item.title} (${CURRENT_INDEX + 1}/${PLAYLIST.length})`;
+}
+
+function loadAndPlay(index, btnEl) {
+  const video = document.getElementById('lessonVideo');
+  const source = document.getElementById('lessonVideoSource');
+  if (!video || !source || !PLAYLIST.length) return;
+
+  CURRENT_INDEX = index;
+  source.src = PLAYLIST[CURRENT_INDEX].src;
+  video.load();
+
+  setActiveButton(btnEl);
+  hideOverlay();
+  updateNowPlaying();
+
+  // try to play (works after user clicked overlay/button at least once)
+  video.play().catch(() => {
+    // autoplay blocked -> show overlay
+    showOverlay();
+  });
+
+  window.scrollTo({ top: video.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+}
+
+function playAtIndex(index, btnEl) {
+  STARTED = true;
+  loadAndPlay(index, btnEl);
+}
+
+function playMainLesson(btnEl) {
+  if (!PLAYLIST.length) return;
+  STARTED = true;
+
+  // main lesson is always last in playlist
+  const mainIndex = PLAYLIST.length - 1;
+  loadAndPlay(mainIndex, btnEl);
+}
+
+// overlay click should start from current playlist item (default 0)
+function startLessonFromOverlay() {
+  const firstBtn = document.querySelector('.block-btn[data-idx="0"]');
+  if (firstBtn) {
+    playAtIndex(0, firstBtn);
+  } else {
+    // if no blocks, try main lesson button
+    const mainBtn = document.getElementById('mainLessonBtn');
+    if (mainBtn) playMainLesson(mainBtn);
+    else {
+      const v = document.getElementById('lessonVideo');
+      if (v) v.play().catch(() => {});
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Build playlist: blocks first, main last
+  PLAYLIST = [
+    {% with blocks=lesson.blocks.all %}
+      {% for b in blocks %}
+        {% if b.video %}
+          {
+            title: "{{ b|get_block_title:lang|escapejs }}",
+            src: "{{ b.video.url|escapejs }}",
+            type: "block"
+          }{% if not forloop.last or lesson.video_file %},{% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endwith %}
+    {% if lesson.video_file %}
+      {
+        title: "{{ lesson|get_title:lang|escapejs }} (Main lesson)",
+        src: "{{ lesson.video_file.url|escapejs }}",
+        type: "main"
+      }
+    {% endif %}
+  ].filter(Boolean);
+
+  // Set initial source to first block if exists, otherwise main
+  const video = document.getElementById('lessonVideo');
+  const source = document.getElementById('lessonVideoSource');
+
+  if (video && source && PLAYLIST.length) {
+    source.src = PLAYLIST[0].src;
+    video.load();
+    updateNowPlaying();
+    showOverlay(); // user gesture needed for autoplay with sound
+  }
+
+  // When playing starts, hide overlay
+  if (video) {
+    video.addEventListener('play', hideOverlay);
+
+    // Auto-advance on end (ONLY after user started once)
+    video.addEventListener('ended', () => {
+      if (!STARTED || !PLAYLIST.length) {
+        showOverlay();
+        return;
+      }
+
+      if (CURRENT_INDEX + 1 < PLAYLIST.length) {
+        const nextIndex = CURRENT_INDEX + 1;
+
+        // find matching button for next index
+        let btnEl = document.querySelector(`.block-btn[data-idx="${nextIndex}"]`);
+        // if next is main (last), button is mainLessonBtn
+        if (!btnEl && nextIndex === PLAYLIST.length - 1) {
+          btnEl = document.getElementById('mainLessonBtn');
+        }
+
+        loadAndPlay(nextIndex, btnEl);
+      } else {
+        const el = document.getElementById('nowPlayingText');
+        if (el) el.textContent = "Lesson finished 🎉";
+        showOverlay();
+      }
+    });
+  }
+
+  // Make first block button active by default (if exists)
+  const firstBtn = document.querySelector('.block-btn[data-idx="0"]');
+  if (firstBtn) setActiveButton(firstBtn);
+});
+</script>
+
+{% endblock %}
+

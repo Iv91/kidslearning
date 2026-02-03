@@ -1,0 +1,178 @@
+.dragdrop-container {
+    text-align: center;
+    padding: 6rem 1rem;
+}
+
+/* Buckets layout */
+.dragdrop-buckets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Each category box */
+.dragdrop-bucket {
+    flex: 1 1 260px;
+    max-width: 320px;
+    min-width: 220px;
+    min-height: 220px;
+    background-color: #f9f9f9;
+    border: 2px solid #a8dadc;
+    border-radius: 10px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.dragdrop-bucket.unsorted {
+    border: 2px dashed #888;
+}
+
+.dragdrop-bucket h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Draggable items */
+.dragdrop-item {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.6rem;
+    margin-bottom: 0.6rem;
+    background-color: white;
+    cursor: grab;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    user-select: none;
+}
+
+.dragdrop-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+/* Buttons */
+.dragdrop-submit {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.dragdrop-submit:hover {
+    background-color: #43a047;
+}
+
+/* Give Up */
+.dragdrop-giveup-container {
+    margin-top: 1rem;
+}
+
+.dragdrop-giveup {
+    background-color: #f2bc00;
+    color: #1a1729;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dragdrop-giveup:hover {
+    background-color: #e0aa00;
+}
+
+/* ✅ Results section */
+.dragdrop-results {
+    margin-top: 2rem;
+}
+
+.dragdrop-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dragdrop-links a {
+    text-decoration: none;
+    background-color: #ccc;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* ✅ MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    .dragdrop-container {
+        padding: 4rem 0.8rem;
+    }
+
+    .dragdrop-buckets {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dragdrop-bucket {
+        width: 90%;
+        max-width: 380px;
+    }
+
+    .dragdrop-item {
+        font-size: 0.95rem;
+        padding: 0.7rem;
+    }
+
+    .dragdrop-submit,
+    .dragdrop-giveup {
+        width: 90%;
+        max-width: 380px;
+    }
+}
+
+/* prevent accidental page scroll while dragging on touch */
+.dragdrop-item {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* smoother scroll area on iOS while dragging */
+.dragdrop-buckets {
+    -webkit-overflow-scrolling: touch;
+}
+
+.intro-multilang p {
+    margin-bottom: 14px;
+    font-size: 1rem;
+}
+
+.intro-sub {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.intro-skip {
+    margin: 10px 0 15px;
+    font-size: 0.95rem;
+    color: #333;
+    text-align: center;
+}
+
+.intro-skip input {
+    margin-right: 6px;
+}

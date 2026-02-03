@@ -1,0 +1,149 @@
+.mcq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8rem 1rem 3rem;
+    text-align: center;
+}
+
+.mcq-loading {
+    padding: 8rem 1rem;
+    text-align: center;
+}
+
+.mcq-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.mcq-progress {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.mcq-card {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    border-radius: 14px;
+    padding: 1.25rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    text-align: left;
+}
+
+.mcq-question {
+    font-size: 1.25rem;
+    margin: 0 0 1rem;
+    text-align: left;
+}
+
+.mcq-options {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.mcq-option {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: 2px solid #e7e7e7;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    transition: 0.15s;
+}
+
+.mcq-option:hover {
+    transform: translateY(-1px);
+}
+
+.mcq-option.selected {
+    border-color: #2196f3;
+    background: #e3f2fd;
+}
+
+.mcq-option.correct {
+    background: #4caf50;
+    color: #fff;
+    border-color: #4caf50;
+}
+
+.mcq-option.wrong {
+    background: #f44336;
+    color: #fff;
+    border-color: #f44336;
+}
+
+.mcq-submit,
+.mcq-next {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.mcq-submit {
+    background: #28a745;
+    color: #fff;
+}
+
+.mcq-next {
+    background: #2196f3;
+    color: #fff;
+}
+
+.mcq-feedback {
+    margin-top: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.mcq-feedback.ok {
+    color: #2e7d32;
+}
+
+.mcq-feedback.bad {
+    color: #c62828;
+}
+
+.mcq-finish-card {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.mcq-score {
+    font-size: 1.1rem;
+    margin: 0.75rem 0 1.25rem;
+}
+
+.mcq-links {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mcq-link {
+    display: inline-block;
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    background: #f2f2f2;
+    color: #111;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.mcq-link:hover {
+    background: #e6e6e6;
+}

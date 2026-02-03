@@ -1,0 +1,52 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ worksheet.title }} - KidsLearning
+{% endblock %}
+
+{% block content %}
+<div style="height:150px;"></div>
+
+<section class="page-header text-center py-5">
+  <h1 class="fw-bold">{{ worksheet.title }}</h1>
+  <p class="lead">{{ worksheet.description }}</p>
+</section>
+
+<div class="container py-5">
+
+  <!-- Image -->
+  <div class="text-center mb-4">
+    {% if worksheet.image %}
+      <img src="{{ worksheet.image.url }}" alt="{{ worksheet.title }}"
+           class="img-fluid rounded shadow"
+           style="max-width: 400px;">
+    {% endif %}
+  </div>
+
+  <!-- Longer description -->
+  <div class="text-center mb-4">
+    <p>{{ worksheet.long_description|linebreaks }}</p>
+  </div>
+
+  <!-- Download button -->
+  <div class="text-center">
+    <a href="{{ worksheet.file.url }}" download class="btn btn-success btn-lg">
+      {% if lang == "sr" %}📥 Preuzmi radni list
+      {% elif lang == "de" %}📥 Arbeitsblatt herunterladen
+      {% else %}📥 Download Worksheet{% endif %}
+    </a>
+  </div>
+
+  <!-- Back link -->
+  <div class="text-center mt-4">
+    <a href="{% url 'resources-home' %}?lang={{ lang }}"
+       class="btn btn-outline-primary">
+      {% if lang == "sr" %}← Nazad na resurse
+      {% elif lang == "de" %}← Zurück zu den Ressourcen
+      {% else %}← Back to Resources{% endif %}
+    </a>
+  </div>
+
+</div>
+{% endblock %}

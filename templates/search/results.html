@@ -1,0 +1,283 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load lesson_translations %}
+
+{% block title %}
+  {% if lang == "sr" %}Rezultati pretrage - KidsLearning
+  {% elif lang == "de" %}Suchergebnisse - KidsLearning
+  {% else %}Search Results - KidsLearning
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="height:150px;"></div>
+
+<section class="page-header text-center py-5">
+
+  <div>
+    {% if lang == "sr" %}
+      🔍 Pretraga za: <strong>{{ query }}</strong>
+    {% elif lang == "de" %}
+      🔍 Suche nach: <strong>{{ query }}</strong>
+    {% else %}
+      🔍 Searching for: <strong>{{ query }}</strong>
+    {% endif %}
+
+    {% if age_group %}
+      <span class="badge bg-primary ms-2">{{ age_group }} years</span>
+    {% else %}
+      <span class="badge bg-secondary ms-2">
+        {% if lang == "sr" %}Sve uzraste{% elif lang == "de" %}Alle Altersgruppen{% else %}All ages{% endif %}
+      </span>
+    {% endif %}
+  </div>
+
+  <div class="container mt-3">
+    <h1 class="fw-bold">
+      {% if lang == "sr" %}Rezultati pretrage{% elif lang == "de" %}Suchergebnisse{% else %}Search Results{% endif %}
+    </h1>
+    <p class="lead">
+      {% if lang == "sr" %}
+        Prikazani rezultati za „<strong>{{ query }}</strong>“.
+      {% elif lang == "de" %}
+        Ergebnisse für „<strong>{{ query }}</strong>“.
+      {% else %}
+        Showing results for "<strong>{{ query }}</strong>".
+      {% endif %}
+    </p>
+  </div>
+</section>
+
+<div class="container py-5">
+
+  <!-- AGE FILTER BUTTONS -->
+  <div class="btn-group mb-4">
+    <a href="?q={{ query }}&lang={{ lang }}"
+       class="btn btn-outline-primary {% if not age_group %}active{% endif %}">
+      {% if lang == "sr" %}Sve{% elif lang == "de" %}Alle{% else %}All{% endif %}
+    </a>
+    <a href="?q={{ query }}&age_group=4-5&lang={{ lang }}"
+       class="btn btn-outline-primary {% if age_group == '4-5' %}active{% endif %}">
+      {% if lang == "sr" %}4–5 godina{% elif lang == "de" %}4–5 Jahre{% else %}4–5 years{% endif %}
+    </a>
+    <a href="?q={{ query }}&age_group=6-7&lang={{ lang }}"
+       class="btn btn-outline-primary {% if age_group == '6-7' %}active{% endif %}">
+      {% if lang == "sr" %}6–7 godina{% elif lang == "de" %}6–7 Jahre{% else %}6–7 years{% endif %}
+    </a>
+  </div>
+
+  {% if lessons_count == 0 and quizzes_count == 0 and worksheets_count == 0 %}
+    <div class="alert alert-danger text-center">
+      {% if lang == "sr" %}
+        ❌ Nema rezultata. Pokušajte drugi pojam za pretragu.
+      {% elif lang == "de" %}
+        ❌ Keine Ergebnisse. Versuche einen anderen Suchbegriff.
+      {% else %}
+        ❌ No results found. Try another search term.
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <!-- LESSONS -->
+  {% if lessons_count %}
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h4>
+        {% if lang == "sr" %}📚 Časovi ({{ lessons_count }})
+        {% elif lang == "de" %}📚 Lektionen ({{ lessons_count }})
+        {% else %}📚 Lessons ({{ lessons_count }})
+        {% endif %}
+      </h4>
+
+      <a href="{% url 'lessons_show_all' %}?q={{ query }}{% if age_group %}&age_group={{ age_group }}{% endif %}&lang={{ lang }}"
+         class="btn btn-sm btn-outline-primary">
+        {% if lang == "sr" %}Prikaži sve{% elif lang == "de" %}Alle anzeigen{% else %}Show All{% endif %}
+      </a>
+    </div>
+
+    <div id="lessonCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for lesson in lessons_preview %}
+          {% if forloop.first or forloop.counter0|divisibleby:3 %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="row">
+          {% endif %}
+
+          <div class="col-md-4">
+            <div class="card text-center mx-2 shadow-sm" style="min-height: 250px;">
+              {% if lesson.image %}
+                <img src="{{ lesson.image.url }}" class="card-img-top"
+                     alt="{{ lesson|get_title:lang }}"
+                     style="max-height:150px; object-fit:contain;">
+              {% else %}
+                <img src="{% static 'assets/images/placeholders/lesson.png' %}"
+                     class="card-img-top" alt="Lesson"
+                     style="max-height:150px; object-fit:contain;">
+              {% endif %}
+              <div class="card-body">
+                <h6 class="card-title">{{ lesson|get_title:lang }}</h6>
+                <a href="{% url 'lesson_detail' lesson.id %}?lang={{ lang }}"
+                   class="btn btn-sm btn-primary">
+                  {% if lang == "sr" %}Pogledaj{% elif lang == "de" %}Ansehen{% else %}View{% endif %}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {% if forloop.counter|divisibleby:3 or forloop.last %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#lessonCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#lessonCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  {% endif %}
+
+  <!-- WORKSHEETS -->
+ <!-- WORKSHEETS -->
+{% if worksheets_count %}
+  <div class="d-flex justify-content-between align-items-center mt-5 mb-2">
+    <h4>
+      {% if lang == "sr" %}📝 Radni listovi ({{ worksheets_count }})
+      {% elif lang == "de" %}📝 Arbeitsblätter ({{ worksheets_count }})
+      {% else %}📝 Worksheets ({{ worksheets_count }})
+      {% endif %}
+    </h4>
+
+    <a href="{% url 'worksheets_show_all' %}?q={{ query }}{% if age_group %}&age_group={{ age_group }}{% endif %}&lang={{ lang }}"
+       class="btn btn-sm btn-outline-primary">
+      {% if lang == "sr" %}Prikaži sve{% elif lang == "de" %}Alle anzeigen{% else %}Show All{% endif %}
+    </a>
+  </div>
+
+  <div id="worksheetCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for worksheet in worksheets_preview %}
+        {% if forloop.first or forloop.counter0|divisibleby:3 %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="row">
+        {% endif %}
+
+        <div class="col-md-4">
+          <div class="card text-center mx-2 shadow-sm" style="min-height: 250px;">
+            
+            <!-- IMAGE ADDED HERE -->
+            {% if worksheet.image %}
+              <img src="{{ worksheet.image.url }}" 
+                   class="card-img-top"
+                   alt="{{ worksheet.title }}"
+                   style="max-height:150px; object-fit:contain;">
+            {% else %}
+              <img src="{% static 'assets/images/placeholders/worksheet.png' %}" 
+                   class="card-img-top"
+                   alt="Worksheet"
+                   style="max-height:150px; object-fit:contain;">
+            {% endif %}
+
+            <div class="card-body">
+              <h6 class="card-title">{{ worksheet.title }}</h6>
+              <a href="{{ worksheet.file.url }}" download 
+                 class="btn btn-sm btn-success">
+                {% if lang == "sr" %}Preuzmi{% elif lang == "de" %}Herunterladen{% else %}Download{% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#worksheetCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#worksheetCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+{% endif %}
+
+
+  <!-- QUIZZES -->
+  <!-- QUIZZES -->
+{% if quizzes_count %}
+  <div class="d-flex justify-content-between align-items-center mt-5 mb-2">
+    <h4>
+      {% if lang == "sr" %}🎮 Kvizovi ({{ quizzes_count }})
+      {% elif lang == "de" %}🎮 Quizze ({{ quizzes_count }})
+      {% else %}🎮 Quizzes ({{ quizzes_count }})
+      {% endif %}
+    </h4>
+  </div>
+
+  <div id="quizCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for quiz in quizzes_preview %}
+        {% if forloop.first or forloop.counter0|divisibleby:3 %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="row">
+        {% endif %}
+
+        <div class="col-md-4">
+          <div class="card text-center mx-2 shadow-sm" style="min-height: 250px;">
+
+            <!-- IMAGE ADDED HERE -->
+            {% if quiz.cover_image %}
+              <img src="{{ quiz.cover_image.url }}"
+                   class="card-img-top"
+                   alt="{{ quiz.title }}"
+                   style="max-height:150px; object-fit:contain;">
+            {% else %}
+              <img src="{% static 'assets/images/placeholders/quiz.png' %}"
+                   class="card-img-top"
+                   alt="Quiz"
+                   style="max-height:150px; object-fit:contain;">
+            {% endif %}
+
+            <div class="card-body">
+              <h6 class="card-title">{{ quiz.title }}</h6>
+
+              <a href="http://localhost:3000/{% if quiz.quiz_type == 'drag_drop' %}drag-quiz/{{ quiz.id }}
+                       {% elif quiz.quiz_type == 'visual' %}visual-quiz/{{ quiz.id }}
+                       {% elif quiz.quiz_type == 'matching' %}matching-quiz/{{ quiz.id }}
+                       {% elif quiz.quiz_type == 'pronunciation' %}pronunciation-quiz/{{ quiz.id }}
+                       {% elif quiz.quiz_type == 'spelling' %}spelling-quiz/{{ quiz.id }}
+                       {% elif quiz.quiz_type == 'audio' %}audio-quiz/{{ quiz.id }}
+                       {% else %}quiz/{{ quiz.id }}{% endif %}"
+                 target="_blank"
+                 class="btn btn-sm btn-primary">
+                {% if lang == "sr" %}Igraj{% elif lang == "de" %}Spielen{% else %}Play{% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#quizCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#quizCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+{% endif %}
+
+
+</div>
+{% endblock %}
+
