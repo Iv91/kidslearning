@@ -27,7 +27,7 @@ function VisualQuizGame() {
     const RAW = (
         process.env.REACT_APP_API_URL ||
         process.env.REACT_APP_API_BASE_URL ||
-        "http://localhost:8000/api/"
+        "https://kidslearning-vhk7.onrender.com/api/"
     ).replace(/\/+$/, "");
 
     const API_BASE = RAW.endsWith("/api") ? RAW : `${ RAW }/api`;
@@ -127,7 +127,7 @@ function VisualQuizGame() {
                     </p>
 
                     <div className="visualquiz-links">
-                        <a href="http://localhost:8000/">← Back to Main Homepage</a>
+                        <a href="https://kidslearning-vhk7.onrender.com/">← Back to Main Homepage</a>
                         <a href="/">← Back to Quizzes</a>
                     </div>
                 </div>

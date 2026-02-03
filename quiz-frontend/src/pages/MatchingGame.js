@@ -29,7 +29,7 @@ function MatchingGame() {
     const RAW_API = (
         process.env.REACT_APP_API_URL ||
         process.env.REACT_APP_API_BASE_URL ||
-        "http://localhost:8000/api/"
+        "https://kidslearning-vhk7.onrender.com/api/"
     ).replace(/\/+$/, "");
 
     const API_BASE = RAW_API.endsWith("/api") ? RAW_API : `${ RAW_API }/api`;
@@ -204,7 +204,7 @@ function MatchingGame() {
                     Your score: {score} / {total}
                 </p>
                 <div className="matching-finished-buttons">
-                    <a href="http://localhost:8000/">← Back to Main Homepage</a>
+                    <a href="https://kidslearning-vhk7.onrender.com/">← Back to Main Homepage</a>
                     <a href="/">← Back to Quizzes</a>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "./AudioQuizGame.css";
 import "../components/GiveUpButton.css";
 import { safePlay, safeRestart } from "../utils/sound";
+import { Link } from "react-router-dom";
 
 function AudioQuizGame() {
     const { id } = useParams();
@@ -22,7 +23,7 @@ function AudioQuizGame() {
     const RAW = (
         process.env.REACT_APP_API_URL ||
         process.env.REACT_APP_API_BASE_URL ||
-        "http://localhost:8000/api/"
+        "https://kidslearning-vhk7.onrender.com/api/"
     ).replace(/\/+$/, "");
 
     const API_BASE = RAW.endsWith("/api") ? RAW : `${ RAW }/api`;
@@ -149,7 +150,7 @@ function AudioQuizGame() {
                         Your score: {score} / {questions.length}
                     </p>
                     <div className="audio-quiz-links">
-                        <a href="http://localhost:3000/" className="audio-quiz-link">
+                        <a href="/" className="audio-quiz-link">
                             ← Back to Main Homepage
                         </a>
                         <a href="/" className="audio-quiz-link">
