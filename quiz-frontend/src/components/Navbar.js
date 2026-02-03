@@ -14,13 +14,17 @@ function Navbar() {
                 <nav className="navigation navbar navbar-expand-lg navbar-light">
                     <div className="container-fluid">
                         <div className="row align-items-center w-100" style={{ margin: 0 }}>
+
                             {/* Logo */}
                             <div className="col-6 col-md-3 p-0">
                                 <div className="navbar-header d-flex align-items-center">
-                                    <a className="navbar-brand d-flex align-items-center gap-2 m-0" href={`http://localhost:8000/?lang=${ lang }`}>
+                                    <a
+                                        className="navbar-brand d-flex align-items-center gap-2 m-0"
+                                        href={`https://kidslearning.onrender.com/?lang=${ lang }`}
+                                    >
                                         <img
-                                            src="http://localhost:8000/static/assets/images/logo/Learning.png"
-                                            alt="Kidslearning"
+                                            src="/Learning.png"
+                                            alt="Kidslearning Logo"
                                             className="kl-logo"
                                         />
                                         <span className="kl-logo-text">Kidslearning</span>
