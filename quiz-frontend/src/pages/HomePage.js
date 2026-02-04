@@ -27,7 +27,7 @@ function HomePage() {
     }, []);
 
     const DJANGO_BASE = useMemo(() => {
-        return (process.env.REACT_APP_DJANGO_PUBLIC_URL || "http://localhost:8000").replace(
+        return (process.env.REACT_APP_DJANGO_PUBLIC_URL || "https://kidslearning-vhk7.onrender.com").replace(
             /\/+$/,
             ""
         );
