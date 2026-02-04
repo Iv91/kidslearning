@@ -222,3 +222,39 @@
         display: none;
     }
 }
+
+/* ✅ Make navbar links bigger + closer to Django homepage */
+.kl-nav-links .nav-link {
+    font-size: 1.05rem !important;
+    /* bigger text */
+    font-weight: 600 !important;
+    /* stronger */
+    letter-spacing: 0.2px;
+}
+
+/* Logo text bigger too */
+.kl-logo-text {
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+}
+
+/* Add more spacing between menu items */
+.kl-nav-links {
+    gap: 28px !important;
+}
+
+/* Improve alignment */
+.kl-nav-links .nav-link {
+    line-height: 52px !important;
+}
+
+@media (max-width: 767px) {
+    .kl-lang-btn {
+        font-size: 0.95rem !important;
+        font-weight: 700;
+    }
+
+    .kl-icon-btn {
+        font-size: 1.35rem !important;
+    }
+}

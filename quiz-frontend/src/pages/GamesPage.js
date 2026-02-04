@@ -6,7 +6,7 @@ function GamesPage() {
     const [quizzes, setQuizzes] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/quizzes/")
+        fetch("https://kidslearning-vhk7.onrender.com/api/quizzes/")
             .then((res) => res.json())
             .then((data) => setQuizzes(data));
     }, []);
