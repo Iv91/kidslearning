@@ -7,9 +7,17 @@ function Navbar() {
     const { lang, setLang, t } = useLang();
     const [query, setQuery] = useState("");
     const [showSearch, setShowSearch] = useState(false);
+    const isLocal = window.location.hostname === "localhost";
 
-    const DJANGO_BASE = (process.env.REACT_APP_DJANGO_BASE || "http://localhost:8000").replace(/\/$/, "");
-    const API_BASE = (process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api").replace(/\/$/, "");
+    const DJANGO_BASE = (
+        process.env.REACT_APP_DJANGO_PUBLIC_URL ||
+        (isLocal ? "http://localhost:8000" : "")
+    ).replace(/\/$/, "");
+
+    const API_BASE = (
+        process.env.REACT_APP_API_URL ||
+        (isLocal ? "http://localhost:8000/api" : "")
+    ).replace(/\/$/, "");
 
     return (
         <header id="header" className="kl-header">
