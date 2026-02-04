@@ -45844,3 +45844,30 @@ only screen and (max-width: 575px) {
 .cd-words-wrapper b.is-visible {
   opacity: 1;
 }
+
+/* Force same typography as Django template */
+:root {
+  --kl-font: "Euclid Circular A", "Euclid Circular A Regular", "Inter", "Poppins", Arial, sans-serif;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--kl-font) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+.rbt-title,
+.rbt-banner-content,
+.section-title {
+  font-family: var(--kl-font) !important;
+  font-weight: 700;
+}
