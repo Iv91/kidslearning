@@ -100,6 +100,13 @@ function Navbar() {
                 <button className="kl-mobile-link" onClick={() => goTo(`/games/?lang=${ lang }`)}>Games</button>
                 <button className="kl-mobile-link" onClick={() => goTo(`/resources/?lang=${ lang }`)}>Resources</button>
                 <button className="kl-mobile-link" onClick={() => goTo(`/contact/?lang=${ lang }`)}>Contact</button>
+                <div className="kl-mobile-divider"></div>
+
+                <div className="kl-mobile-lang">
+                    <button className={`kl-lang-btn ${ lang === "en" ? "active" : "" }`} onClick={() => setLang("en")} type="button">EN</button>
+                    <button className={`kl-lang-btn ${ lang === "sr" ? "active" : "" }`} onClick={() => setLang("sr")} type="button">SR</button>
+                    <button className={`kl-lang-btn ${ lang === "de" ? "active" : "" }`} onClick={() => setLang("de")} type="button">DE</button>
+                </div>
             </div>
         </header>
     );

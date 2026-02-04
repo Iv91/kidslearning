@@ -1,22 +1,36 @@
-/* Bigger header like Django */
+/* ============================
+   KidsLearning Navbar (React)
+   - Desktop: logo + centered links + search + language
+   - Mobile: logo + search icon + burger
+            search row below
+            menu panel contains links + languages
+   ============================ */
+
+/* Sticky white header like Django */
 .kl-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, .06);
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Make it “bigger” */
+/* Main row */
 .kl-header-inner {
     max-width: 1280px;
     margin: 0 auto;
     padding: 20px 34px;
-    /* ✅ bigger */
+    /* bigger header */
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 18px;
+}
+
+/* Left */
+.kl-left {
+    display: flex;
+    align-items: center;
 }
 
 .kl-logo-btn {
@@ -30,7 +44,7 @@
 
 .kl-logo {
     height: 56px;
-    /* ✅ bigger logo */
+    /* bigger logo */
     width: auto;
     display: block;
 }
@@ -49,7 +63,6 @@
     cursor: pointer;
     color: #111827;
     font-size: 16px;
-    /* ✅ bigger */
     font-weight: 500;
     padding: 8px 6px;
 }
@@ -66,20 +79,22 @@
     white-space: nowrap;
 }
 
-/* Search */
+/* Search icon button */
 .kl-icon-btn {
     border: 0;
     background: transparent;
     cursor: pointer;
     font-size: 20px;
-    /* slightly bigger */
+    line-height: 1;
     color: #111827;
+    padding: 6px 8px;
 }
 
 .kl-icon-btn:hover {
     color: #2563eb;
 }
 
+/* Desktop search (if you ever show it inline) */
 .kl-search-form {
     display: flex;
     align-items: center;
@@ -113,12 +128,13 @@
     color: #6b7280;
 }
 
-/* Language */
+/* Language (desktop) */
 .kl-lang {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .kl-lang-btn {
@@ -128,7 +144,7 @@
     cursor: pointer;
     color: #111827;
     font-size: 15px;
-    /* ✅ bigger */
+    line-height: 1;
 }
 
 .kl-lang-btn.active {
@@ -143,21 +159,44 @@
 /* Burger */
 .kl-burger {
     display: none;
-    /* desktop hidden */
+    /* hidden on desktop */
     border: 0;
     background: transparent;
     cursor: pointer;
-    font-size: 26px;
-    padding: 4px 6px;
+    font-size: 28px;
+    padding: 4px 8px;
     color: #111827;
 }
 
-/* Mobile menu panel */
+/* ============================
+   Search row below header (mobile-friendly)
+   ============================ */
+.kl-search-row {
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 10px 12px;
+}
+
+/* Make search responsive (no overflow) */
+.kl-search-row .kl-search-form {
+    width: 100%;
+}
+
+.kl-search-row .kl-search-input {
+    flex: 1;
+    min-width: 0;
+    /* IMPORTANT: allows shrinking inside flex */
+    width: auto;
+}
+
+/* ============================
+   Mobile menu panel (dropdown)
+   ============================ */
 .kl-mobile-panel {
     display: none;
-    border-top: 1px solid rgba(0, 0, 0, .06);
-    background: #fff;
-    padding: 10px 16px 16px;
+    background: #ffffff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 10px 12px 14px;
 }
 
 .kl-mobile-panel.open {
@@ -181,27 +220,65 @@
     color: #2563eb;
 }
 
-/* Responsive */
+/* Divider inside menu */
+.kl-mobile-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.06);
+    margin: 10px 6px;
+}
+
+/* Mobile language block (inside burger menu) */
+.kl-mobile-lang {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 8px 8px 2px;
+    font-weight: 800;
+}
+
+.kl-mobile-lang .kl-lang-btn {
+    font-size: 15px;
+    padding: 10px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.kl-mobile-lang .kl-lang-btn.active {
+    border-color: rgba(37, 99, 235, 0.35);
+    background: rgba(37, 99, 235, 0.08);
+}
+
+/* ============================
+   Responsive rules
+   ============================ */
 @media (max-width: 900px) {
     .kl-header-inner {
-        padding: 14px 14px;
+        padding: 12px 12px;
+        gap: 10px;
     }
 
     .kl-logo {
-        height: 46px;
+        height: 44px;
     }
 
+    /* Hide desktop center links on mobile */
     .kl-nav {
         display: none;
     }
 
-    /* hide desktop links */
+    /* Show burger */
     .kl-burger {
         display: inline-block;
     }
 
-    /* show burger */
+    /* Hide language in top bar (we move it into burger menu) */
+    .kl-right .kl-lang {
+        display: none;
+    }
+
+    /* Search input should not be too big on small screens */
     .kl-search-input {
-        width: 150px;
+        width: 100%;
     }
 }
