@@ -1,91 +1,99 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useMemo, useState } from "react";
 import { useLang } from "../i18n/LanguageContext";
 import "./Navbar.css";
 
 function Navbar() {
-    const { lang, setLang, t } = useLang();
-    const [query, setQuery] = useState("");
+    const { lang, setLang } = useLang();
     const [showSearch, setShowSearch] = useState(false);
-    const isLocal = window.location.hostname === "localhost";
+    const [query, setQuery] = useState("");
 
-    const DJANGO_BASE = (
-        process.env.REACT_APP_DJANGO_PUBLIC_URL ||
-        (isLocal ? "http://localhost:8000" : "")
-    ).replace(/\/$/, "");
+    // Django base URL (for going back to main site)
+    const DJANGO_BASE = useMemo(() => {
+        return (process.env.REACT_APP_DJANGO_PUBLIC_URL || "http://localhost:8000").replace(/\/+$/, "");
+    }, []);
 
-    const API_BASE = (
-        process.env.REACT_APP_API_URL ||
-        (isLocal ? "http://localhost:8000/api" : "")
-    ).replace(/\/$/, "");
+    const goTo = (path) => {
+        window.location.href = `${ DJANGO_BASE }${ path }`;
+    };
+
+    const submitSearch = (e) => {
+        e.preventDefault();
+        // Example: redirect to Django search page (change if your URL differs)
+        window.location.href = `${ DJANGO_BASE }/?q=${ encodeURIComponent(query) }&lang=${ lang }`;
+    };
 
     return (
-        <header id="header" className="kl-header">
+        <header className="kl-header">
             <div className="kl-header-inner">
-                <nav className="navigation navbar navbar-expand-lg navbar-light">
-                    <div className="container-fluid">
-                        <div className="row align-items-center w-100" style={{ margin: 0 }}>
 
-                            {/* Logo */}
-                            <div className="col-6 col-md-3 p-0">
-                                <div className="navbar-header d-flex align-items-center">
-                                    <a className="navbar-brand d-flex align-items-center gap-2 m-0" href={`${ DJANGO_BASE }/?lang=${ lang }`}>
-                                        {/* ✅ public/ image */}
-                                        <img
-                                            src="/Learning.png"
-                                            alt="Kidslearning"
-                                            className="kl-logo"
-                                        />
-                                        <span className="kl-logo-text">Kidslearning</span>
-                                    </a>
-                                </div>
-                            </div>
+                {/* LEFT: Logo */}
+                <div className="kl-left" onClick={() => goTo(`/?lang=${ lang }`)} role="button" tabIndex={0}>
+                    <img src="/Learning.png" alt="KidsLearning" className="kl-logo" />
+                </div>
 
-                            {/* Menu */}
-                            <div className="col-md-6 d-none d-md-flex justify-content-center p-0">
-                                <ul className="navbar-nav kl-nav-links d-flex flex-row m-0 p-0">
-                                    <li className="nav-item"><a className="nav-link" href={`${ DJANGO_BASE }/?lang=${ lang }`}>{t.home}</a></li>
-                                    <li className="nav-item"><a className="nav-link" href={`${ DJANGO_BASE }/about/?lang=${ lang }`}>{t.about}</a></li>
-                                    <li className="nav-item"><a className="nav-link" href={`${ DJANGO_BASE }/lessons/?lang=${ lang }`}>{t.lessons}</a></li>
-                                    <li className="nav-item"><Link className="nav-link" to="/">{t.games}</Link></li>
-                                    <li className="nav-item"><a className="nav-link" href={`${ DJANGO_BASE }/resources/?lang=${ lang }`}>{t.resources}</a></li>
-                                    <li className="nav-item"><a className="nav-link" href={`${ DJANGO_BASE }/contact/?lang=${ lang }`}>{t.contact}</a></li>
-                                </ul>
-                            </div>
-
-                            {/* Right side */}
-                            <div className="col-6 col-md-3 d-flex justify-content-end align-items-center kl-right p-0">
-                                {!showSearch ? (
-                                    <button type="button" className="kl-icon-btn" onClick={() => setShowSearch(true)}>🔍</button>
-                                ) : (
-                                    <form method="get" action={`${ DJANGO_BASE }/lessons/search/`} className="kl-search-form">
-                                        <input
-                                            className="form-control"
-                                            type="search"
-                                            name="q"
-                                            placeholder={t.searchPlaceholder}
-                                            value={query}
-                                            onChange={(e) => setQuery(e.target.value)}
-                                            autoFocus
-                                        />
-                                        <input type="hidden" name="lang" value={lang} />
-                                        <button className="kl-search-submit" type="submit">{t.go}</button>
-                                        <button type="button" className="kl-icon-btn" onClick={() => setShowSearch(false)} aria-label="Close search">✕</button>
-                                    </form>
-                                )}
-
-                                <div className="kl-lang">
-                                    <button type="button" className={`kl-lang-btn ${ lang === "en" ? "active" : "" }`} onClick={() => setLang("en")}>EN</button>
-                                    <span className="kl-lang-sep">|</span>
-                                    <button type="button" className={`kl-lang-btn ${ lang === "sr" ? "active" : "" }`} onClick={() => setLang("sr")}>SR</button>
-                                    <span className="kl-lang-sep">|</span>
-                                    <button type="button" className={`kl-lang-btn ${ lang === "de" ? "active" : "" }`} onClick={() => setLang("de")}>DE</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                {/* CENTER: Links (match Django layout) */}
+                <nav className="kl-nav" aria-label="Main">
+                    <button className="kl-nav-link" onClick={() => goTo(`/?lang=${ lang }`)}>Home</button>
+                    <button className="kl-nav-link" onClick={() => goTo(`/about/?lang=${ lang }`)}>About</button>
+                    <button className="kl-nav-link" onClick={() => goTo(`/lessons/?lang=${ lang }`)}>Lessons</button>
+                    <button className="kl-nav-link" onClick={() => goTo(`/games/?lang=${ lang }`)}>Games</button>
+                    <button className="kl-nav-link" onClick={() => goTo(`/resources/?lang=${ lang }`)}>Resources</button>
+                    <button className="kl-nav-link" onClick={() => goTo(`/contact/?lang=${ lang }`)}>Contact</button>
                 </nav>
+
+                {/* RIGHT: Search + Language */}
+                <div className="kl-right">
+                    {!showSearch ? (
+                        <button className="kl-icon-btn" onClick={() => setShowSearch(true)} aria-label="Search">
+                            🔍
+                        </button>
+                    ) : (
+                        <form className="kl-search-form" onSubmit={submitSearch}>
+                            <input
+                                className="kl-search-input"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                placeholder="Search…"
+                            />
+                            <button className="kl-search-submit" type="submit">Go</button>
+                            <button
+                                className="kl-search-close"
+                                type="button"
+                                onClick={() => { setShowSearch(false); setQuery(""); }}
+                                aria-label="Close search"
+                            >
+                                ✕
+                            </button>
+                        </form>
+                    )}
+
+                    <div className="kl-lang">
+                        <button
+                            className={`kl-lang-btn ${ lang === "en" ? "active" : "" }`}
+                            onClick={() => setLang("en")}
+                            type="button"
+                        >
+                            EN
+                        </button>
+                        <span className="kl-lang-sep">|</span>
+                        <button
+                            className={`kl-lang-btn ${ lang === "sr" ? "active" : "" }`}
+                            onClick={() => setLang("sr")}
+                            type="button"
+                        >
+                            SR
+                        </button>
+                        <span className="kl-lang-sep">|</span>
+                        <button
+                            className={`kl-lang-btn ${ lang === "de" ? "active" : "" }`}
+                            onClick={() => setLang("de")}
+                            type="button"
+                        >
+                            DE
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </header>
     );

@@ -1,105 +1,122 @@
-/* Sticky header with soft KidsLearning background */
+/* Sticky white header like Django pages */
 .kl-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: #dcd9e1;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Inner padding to match Django header feeling */
+/* Center content with same “site container” feel */
 .kl-header-inner {
-    padding: 12px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
 }
 
-/* Logo */
-.kl-logo {
-    height: 46px;
-    margin-right: 8px;
-}
-
-.kl-logo-text {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #111827;
-}
-
-/* Nav links */
-.kl-nav-links .nav-link {
-    font-weight: 500;
-    font-size: 0.98rem;
-    color: #111827;
-    padding: 0 14px;
-}
-
-.kl-nav-links .nav-link:hover {
-    color: #6366f1;
-    /* soft purple like Django text */
-}
-
-/* Search icon + buttons */
-.kl-icon-btn {
-    border: none;
-    background: transparent;
-    font-size: 1.4rem;
-    color: #111827;
+/* Left logo */
+.kl-left {
+    display: flex;
+    align-items: center;
     cursor: pointer;
+}
+
+.kl-logo {
+    height: 48px;
+    /* closer to Django screenshot */
+    width: auto;
+    display: block;
+}
+
+/* Center nav links */
+.kl-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+}
+
+.kl-nav-link {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 6px 4px;
+}
+
+.kl-nav-link:hover {
+    color: #2563eb;
+    /* Django-like blue */
+}
+
+/* Right side */
+.kl-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+/* Search */
+.kl-icon-btn {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: #111827;
 }
 
 .kl-icon-btn:hover {
-    color: #6366f1;
+    color: #2563eb;
 }
 
-/* Search form when open */
 .kl-search-form {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
-.kl-search-form .form-control {
-    max-width: 220px;
-    font-size: 0.9rem;
+.kl-search-input {
+    width: 190px;
+    padding: 8px 12px;
     border-radius: 999px;
     border: 1px solid #d1d5db;
-    padding: 6px 12px;
+    font-size: 14px;
+    outline: none;
 }
 
 .kl-search-submit {
-    border: none;
-    background: #6366f1;
+    border: 0;
+    background: #2563eb;
     color: #fff;
-    font-size: 0.8rem;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border-radius: 999px;
+    font-size: 13px;
     cursor: pointer;
 }
 
-/* Mobile tweaks: center logo and hide menu (you can later add burger) */
-@media (max-width: 767px) {
-    .kl-header-inner {
-        padding: 10px 16px;
-    }
-
-    .kl-nav-links {
-        display: none;
-    }
-
-    .kl-logo {
-        height: 40px;
-    }
+.kl-search-close {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: #6b7280;
 }
 
-.kl-right {
-    gap: 12px;
-}
-
+/* Language */
 .kl-lang {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-left: 8px;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .kl-lang-btn {
@@ -108,13 +125,12 @@
     padding: 4px 6px;
     cursor: pointer;
     color: #111827;
-    font-size: 0.95rem;
+    font-size: 14px;
     line-height: 1;
 }
 
 .kl-lang-btn.active {
     color: #2563eb;
-    /* Django-like blue */
 }
 
 .kl-lang-sep {
@@ -122,27 +138,18 @@
     font-weight: 600;
 }
 
-/* IMPORTANT: remove bullets + spacing that makes menu look broken */
-.kl-nav-links {
-    list-style: none;
-    gap: 18px;
-}
+/* Mobile: match Django behaviour (compact) */
+@media (max-width: 900px) {
+    .kl-nav {
+        display: none;
+        /* like your current “no burger yet” approach */
+    }
 
-/* keep <a> alignment like Django */
-.kl-nav-links .nav-link {
-    text-decoration: none;
-    display: inline-block;
-    line-height: 46px;
-}
+    .kl-header-inner {
+        padding: 12px 16px;
+    }
 
-/* make right area not wrap ugly */
-.kl-right {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 12px;
-}
-
-/* keep language buttons neat */
-.kl-lang {
-    white-space: nowrap;
+    .kl-logo {
+        height: 42px;
+    }
 }
