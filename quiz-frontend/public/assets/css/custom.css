@@ -1,0 +1,406 @@
+/* =====================================================
+   CUSTOM HERO BANNER (CLEAN + CODESTER SAFE)
+   Target: .rbt-banner-area.rbt-banner-3
+   ===================================================== */
+
+/* Remove template shapes everywhere */
+.shape-wrapper,
+.left-shape,
+.top-shape {
+    display: none !important;
+}
+
+/* Base banner setup (all screens) */
+.rbt-banner-3 {
+    background-image: url("../images/backgroundchildren.jpg");
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+
+    position: relative;
+    overflow: hidden;
+
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Keep text above everything */
+.rbt-banner-3 .banner-content {
+    position: relative;
+    z-index: 3;
+    max-width: 650px;
+}
+
+/* If the theme adds decorative pseudo layers, disable them */
+.rbt-banner-3::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* -----------------------------------------
+   DESKTOP / TABLET (>= 768px)
+   Image on the right, smaller
+   ----------------------------------------- */
+@media (min-width: 768px) {
+    .rbt-banner-3 {
+        background-position: right center;
+        background-size: 55% auto;
+    }
+
+    /* Soft fade from left to right for readability */
+    .rbt-banner-3::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right,
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.85) 40%,
+                rgba(255, 255, 255, 0.00) 70%);
+        z-index: 2;
+    }
+}
+
+/* -----------------------------------------
+   MOBILE (< 768px)
+   Full background image, bright and readable
+   ----------------------------------------- */
+@media (max-width: 767px) {
+    .rbt-banner-3 {
+        background-position: center center !important;
+        background-size: cover !important;
+
+        padding-top: 70px !important;
+        padding-bottom: 70px !important;
+    }
+
+    /* Brighten image but keep it visible */
+    .rbt-banner-3::after {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        /* 0.25–0.45 */
+        z-index: 2 !important;
+        display: block !important;
+    }
+
+    /* Make sure text stays on top */
+    .rbt-banner-3 .banner-content {
+        position: relative !important;
+        z-index: 3 !important;
+        max-width: 100% !important;
+    }
+
+    /* Slightly smaller typography for mobile */
+    .rbt-banner-3 .title {
+        font-size: 34px !important;
+        line-height: 1.15 !important;
+    }
+
+    .rbt-banner-3 .description {
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+    }
+}
+
+/* -----------------------------------------
+   Safety: remove any "STUDY" pseudo text layer
+   (if any leftover marque layer exists)
+   ----------------------------------------- */
+.rbt-banner-3 .edumarque::before,
+.rbt-banner-3 .edumarque::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* If edumarque exists on some pages, hide it (we use only background now) */
+.rbt-banner-3 .edumarque {
+    display: none !important;
+}
+
+/* =========================================
+   HERO SPACING FIX – MOVE CONTENT UP
+   ========================================= */
+
+/* Reduce space caused by transparent header */
+.rbt-banner-area.header-transperent-spacer {
+    padding-top: 0 !important;
+}
+
+/* Move hero content closer to navbar */
+.rbt-banner-3 {
+    padding-top: 50px !important;
+    /* was 90px */
+}
+
+@media (max-width: 767px) {
+    .rbt-banner-3 {
+        padding-top: 30px !important;
+    }
+}
+
+/* =========================================
+   MOBILE HERO FIX: spacing + full image + text contrast
+   ========================================= */
+@media (max-width: 767px) {
+
+    /* 1) Push hero below the fixed header */
+    .rbt-banner-area.header-transperent-spacer,
+    .rbt-banner-3 {
+        padding-top: 110px !important;
+        /* increase if still behind logo */
+        padding-bottom: 80px !important;
+    }
+
+    /* 2) Make background image fill the whole hero */
+    .rbt-banner-3 {
+        background-position: center center !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        min-height: 100vh;
+        /* makes image feel "whole" */
+    }
+
+    /* 3) Bright overlay so image stays visible but text is readable */
+    .rbt-banner-3::after {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 !important;
+        background: rgba(255, 255, 255, 0.25) !important;
+        /* 0.20–0.40 */
+        z-index: 2 !important;
+    }
+
+    /* Keep content above overlay */
+    .rbt-banner-3 .banner-content {
+        position: relative !important;
+        z-index: 3 !important;
+    }
+
+    /* 4) Stronger text colors for visibility */
+    .rbt-banner-3 .subtitle {
+        color: #b8004c !important;
+        /* darker pink */
+        font-weight: 700 !important;
+    }
+
+    .rbt-banner-3 .title {
+        color: #0b1320 !important;
+        /* deep navy */
+        text-shadow: 0 2px 10px rgba(255, 255, 255, 0.7) !important;
+    }
+
+    .rbt-banner-3 .description,
+    .rbt-banner-3 .banner-content p,
+    .rbt-banner-3 .banner-content .subtitle,
+    .rbt-banner-3 .total-join-students {
+        color: #1a2233 !important;
+        text-shadow: 0 1px 8px rgba(255, 255, 255, 0.65) !important;
+    }
+
+    /* Optional: make buttons sit nicely */
+    .rbt-banner-3 .rbt-btn {
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08) !important;
+    }
+}
+
+/* =========================================
+   MOBILE: move hero content closer to navbar
+   ========================================= */
+@media (max-width: 767px) {
+
+    /* Reduce top spacing of the hero section */
+    .rbt-banner-area.header-transperent-spacer,
+    .rbt-banner-3 {
+        padding-top: 80px !important;
+        /* was ~110px */
+    }
+
+    /* Remove extra margin above the subtitle */
+    .rbt-banner-3 .section-title {
+        margin-top: 0 !important;
+    }
+
+    /* Slightly pull content upward */
+    .rbt-banner-3 .banner-content {
+        margin-top: -10px !important;
+    }
+}
+
+/* =========================================
+   HERO: remove big empty space (desktop + mobile)
+   ========================================= */
+
+/* Reduce extra space inside the hero */
+.rbt-banner-3 {
+    padding-bottom: 25px !important;
+    /* try 30–60 */
+    min-height: unset !important;
+    height: auto !important;
+}
+
+/* If any wrapper gives extra spacing */
+.rbt-banner-area.header-transperent-spacer {
+    padding-bottom: 0 !important;
+}
+
+/* Pull the next section a bit closer */
+.rbt-banner-area+.rbt-section-gap,
+.rbt-banner-area+section {
+    margin-top: -80px !important;
+    /* try -20 to -60 */
+}
+
+/* =========================================
+   GLOBAL: reduce huge vertical gaps between sections
+   (desktop + mobile)
+   ========================================= */
+
+/* HiStudy section spacing utilities (common ones) */
+.rbt-section-gap {
+    padding-top: 20px !important;
+    padding-bottom: 80px !important;
+}
+
+.rbt-section-gapTop {
+    padding-top: 80px !important;
+}
+
+.rbt-section-gapBottom {
+    padding-bottom: 80px !important;
+}
+
+/* Reduce extra margin that some titles/blocks add */
+.rbt-section-title,
+.section-title,
+.section-head {
+    margin-bottom: 30px !important;
+}
+
+/* -----------------------------------------
+   MOBILE: make gaps tighter
+   ----------------------------------------- */
+@media (max-width: 767px) {
+    .rbt-section-gap {
+        padding-top: 30px !important;
+        padding-bottom: 50px !important;
+    }
+
+    .rbt-section-gapTop {
+        padding-top: 50px !important;
+    }
+
+    .rbt-section-gapBottom {
+        padding-bottom: 50px !important;
+    }
+}
+
+/* ================================
+   BLOG DETAIL IMAGE
+   ================================ */
+
+.blog-detail-image {
+    display: block;
+    max-width: 100%;
+    max-height: 150px;
+    /* 🔑 controls size */
+    width: auto;
+    height: auto;
+    margin: 0 auto 30px auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .blog-detail-image {
+        max-height: 260px;
+    }
+}
+
+/* =========================================
+   BLOG PAGES: push content below sticky navbar
+   ========================================= */
+
+/* If your blog pages use this wrapper (from your template) */
+.blog-detail {
+    padding-top: 40px;
+    /* extra safety */
+}
+
+/* Main fix: add space at top of the blog content area */
+.blog-page-offset,
+.rbt-section-gap.bg-color-white {
+    padding-top: 140px !important;
+    /* adjust if needed: 110–160 */
+}
+
+/* Kill the blue icon (it is generated by the theme on the avatar link) */
+.rbt-like-total .profile-share a.avatar::before,
+.rbt-like-total .profile-share a.avatar::after {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+}
+
+.header-transperent-spacer,
+.rbt-banner-area,
+.rbt-banner-area .wrapper {
+    padding-top: 110px !important;
+    padding-bottom: 50px !important;
+}
+
+.rbt-section-gap,
+.service-wrapper.rbt-section-gap,
+.rbt-categories-area.rbt-section-gap {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+}
+
+/* =====================================================
+   HERO FIX: ONLY mobile changes, desktop unchanged
+   ===================================================== */
+
+/* Desktop/tablet (>=768px): keep your current design */
+@media (min-width: 768px) {
+    .rbt-banner-3 {
+        background-image: url("../images/backgroundchildren.jpg") !important;
+        background-position: right center !important;
+        background-size: 55% auto !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .kl-hero-mobile-image {
+        display: none !important;
+    }
+
+    /* keep desktop overlay fade if you use it */
+    .rbt-banner-3::after {
+        display: block !important;
+    }
+}
+
+/* Mobile (<768px): image above text */
+@media (max-width: 767px) {
+    .rbt-banner-3 {
+        background-image: none !important;
+    }
+
+    .rbt-banner-3::after,
+    .rbt-banner-3::before {
+        content: none !important;
+        display: none !important;
+    }
+
+    .kl-hero-mobile-image {
+        margin-bottom: 20px;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .kl-hero-mobile-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
