@@ -146,3 +146,79 @@
 .kl-lang {
     white-space: nowrap;
 }
+
+/* ---------- Mobile navbar layout fix ---------- */
+@media (max-width: 767px) {
+    .kl-header-inner {
+        padding: 10px 12px;
+    }
+
+    /* Make columns behave nicely */
+    .kl-header .row.align-items-center.w-100 {
+        flex-wrap: nowrap;
+        /* keep left + right on one row */
+    }
+
+    /* Left: logo area can shrink */
+    .navbar-brand {
+        min-width: 0;
+        /* allow text to shrink */
+    }
+
+    .kl-logo {
+        height: 34px;
+        /* smaller logo on mobile */
+        margin-right: 6px;
+    }
+
+    .kl-logo-text {
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* prevent overlap */
+        max-width: 120px;
+        /* adjust if needed */
+    }
+
+    /* Right: keep it tight and never wrap */
+    .kl-right {
+        gap: 6px;
+        flex-wrap: nowrap;
+        min-width: 0;
+    }
+
+    .kl-icon-btn {
+        font-size: 1.2rem;
+        padding: 2px 6px;
+    }
+
+    .kl-lang {
+        gap: 4px;
+        margin-left: 4px;
+    }
+
+    .kl-lang-btn {
+        font-size: 0.85rem;
+        padding: 2px 4px;
+    }
+
+    /* Search input must not push everything off-screen */
+    .kl-search-form .form-control {
+        max-width: 130px;
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+
+    .kl-search-submit {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Extra-small phones: hide brand text (logo only) */
+@media (max-width: 380px) {
+    .kl-logo-text {
+        display: none;
+    }
+}
