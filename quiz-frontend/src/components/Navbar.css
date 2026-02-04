@@ -1,89 +1,56 @@
-/* ==========================================
-   KidsLearning React Navbar (FINAL CLEAN)
-   Matches Django style + strong overrides
-   ========================================== */
-
-/* Sticky header */
+/* Sticky header with soft KidsLearning background */
 .kl-header {
     position: sticky;
     top: 0;
-    z-index: 2000;
+    z-index: 1000;
     background: #dcd9e1;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
 }
 
-/* Inner spacing like Django */
+/* Inner padding to match Django header feeling */
 .kl-header-inner {
-    padding: 18px 45px;
+    padding: 12px 40px;
 }
 
-/* ------------------------------------------
-   Logo
------------------------------------------- */
-
+/* Logo */
 .kl-logo {
-    height: 44px;
+    height: 46px;
     margin-right: 8px;
 }
 
 .kl-logo-text {
-    font-size: 1.35rem;
-    font-weight: 900;
+    font-weight: 700;
+    font-size: 1.1rem;
     color: #111827;
-    white-space: nowrap;
 }
 
-/* ------------------------------------------
-   Desktop Menu Links (FORCED OVERRIDE)
------------------------------------------- */
-
-.kl-header .navbar .navbar-nav {
-    display: flex;
-    gap: 30px;
+/* Nav links */
+.kl-nav-links .nav-link {
+    font-weight: 500;
+    font-size: 0.98rem;
+    color: #111827;
+    padding: 0 14px;
 }
 
-/* Main links */
-.kl-header .navbar .navbar-nav .nav-link {
-    font-size: 1.2rem !important;
-    font-weight: 800 !important;
-    line-height: 56px !important;
-    color: #111827 !important;
-    text-decoration: none !important;
-    padding: 0 10px !important;
-    transition: 0.2s ease;
+.kl-nav-links .nav-link:hover {
+    color: #6366f1;
+    /* soft purple like Django text */
 }
 
-/* Hover effect */
-.kl-header .navbar .navbar-nav .nav-link:hover {
-    color: #4f46e5 !important;
-}
-
-/* ------------------------------------------
-   Right Side (Search + Language)
------------------------------------------- */
-
-.kl-right {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: nowrap;
-}
-
-/* Search icon */
+/* Search icon + buttons */
 .kl-icon-btn {
     border: none;
     background: transparent;
-    font-size: 1.6rem;
-    cursor: pointer;
+    font-size: 1.4rem;
     color: #111827;
-    transition: 0.2s;
+    cursor: pointer;
 }
 
 .kl-icon-btn:hover {
-    color: #4f46e5;
+    color: #6366f1;
 }
 
-/* Search form */
+/* Search form when open */
 .kl-search-form {
     display: flex;
     align-items: center;
@@ -91,104 +58,91 @@
 }
 
 .kl-search-form .form-control {
-    max-width: 200px;
-    border-radius: 999px;
+    max-width: 220px;
     font-size: 0.9rem;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
     padding: 6px 12px;
 }
 
 .kl-search-submit {
     border: none;
-    background: #4f46e5;
-    color: white;
+    background: #6366f1;
+    color: #fff;
     font-size: 0.8rem;
-    font-weight: 700;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border-radius: 999px;
     cursor: pointer;
 }
 
-/* ------------------------------------------
-   Language Buttons
------------------------------------------- */
+/* Mobile tweaks: center logo and hide menu (you can later add burger) */
+@media (max-width: 767px) {
+    .kl-header-inner {
+        padding: 10px 16px;
+    }
+
+    .kl-nav-links {
+        display: none;
+    }
+
+    .kl-logo {
+        height: 40px;
+    }
+}
+
+.kl-right {
+    gap: 12px;
+}
 
 .kl-lang {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    white-space: nowrap;
+    gap: 8px;
+    margin-left: 8px;
+    font-weight: 700;
 }
 
 .kl-lang-btn {
     background: transparent;
-    border: none;
+    border: 0;
+    padding: 4px 6px;
     cursor: pointer;
-    font-size: 1.05rem;
-    font-weight: 800;
     color: #111827;
-    padding: 3px 5px;
+    font-size: 0.95rem;
+    line-height: 1;
 }
 
 .kl-lang-btn.active {
     color: #2563eb;
+    /* Django-like blue */
 }
 
 .kl-lang-sep {
     color: #9ca3af;
-    font-weight: 700;
+    font-weight: 600;
 }
 
-/* ------------------------------------------
-   MOBILE RESPONSIVE FIX
------------------------------------------- */
-
-@media (max-width: 768px) {
-
-    /* Reduce padding */
-    .kl-header-inner {
-        padding: 12px 15px;
-    }
-
-    /* Hide desktop menu */
-    .kl-header .navbar .navbar-nav {
-        display: none !important;
-    }
-
-    /* Smaller logo */
-    .kl-logo {
-        height: 34px;
-    }
-
-    .kl-logo-text {
-        font-size: 1.05rem;
-        max-width: 140px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* Tight right side */
-    .kl-right {
-        gap: 8px;
-    }
-
-    /* Search smaller */
-    .kl-icon-btn {
-        font-size: 1.3rem;
-    }
-
-    /* Language smaller */
-    .kl-lang-btn {
-        font-size: 0.9rem;
-    }
-
-    .kl-search-form .form-control {
-        max-width: 120px;
-    }
+/* IMPORTANT: remove bullets + spacing that makes menu look broken */
+.kl-nav-links {
+    list-style: none;
+    gap: 18px;
 }
 
-/* Extra small phones: hide text */
-@media (max-width: 380px) {
-    .kl-logo-text {
-        display: none;
-    }
+/* keep <a> alignment like Django */
+.kl-nav-links .nav-link {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 46px;
+}
+
+/* make right area not wrap ugly */
+.kl-right {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+
+/* keep language buttons neat */
+.kl-lang {
+    white-space: nowrap;
 }
