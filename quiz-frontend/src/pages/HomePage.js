@@ -68,10 +68,10 @@ function HomePage() {
     // --- Texts depending on language ---
     const titleText =
         lang === "sr"
-            ? "🎮 Dobrodošli u FunlishLand kvizove"
+            ? "🎮 Dobrodošli u Kidslearning kvizove"
             : lang === "de"
-                ? "🎮 Willkommen bei den FunlishLand-Quizzen"
-                : "🎮 Welcome to FunlishLand Quizzes";
+                ? "🎮 Willkommen bei den Kidslearning-Quizzen"
+                : "🎮 Welcome to Kidslearning Quizzes";
 
     const subtitleText =
         lang === "sr"

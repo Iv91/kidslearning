@@ -125,15 +125,15 @@
           {% for quiz in related_quizzes %}
             <li style="margin: 10px 0;">
               {% if quiz.quiz_type == "matching" %}
-                <a href="http://localhost:3000/matching-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+                <a href="https://kidslearning-seven.vercel.app//matching-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
               {% elif quiz.quiz_type == "visual" %}
-                <a href="http://localhost:3000/visual-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+                <a href="https://kidslearning-seven.vercel.app//visual-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
               {% elif quiz.quiz_type == "drag_drop" %}
-                <a href="http://localhost:3000/drag-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+                <a href="https://kidslearning-seven.vercel.app//drag-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
               {% elif quiz.quiz_type == "audio" %}
-                <a href="http://localhost:3000/audio-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+                <a href="https://kidslearning-seven.vercel.app//audio-quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
               {% else %}
-                <a href="http://localhost:3000/quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
+                <a href="https://kidslearning-seven.vercel.app//quiz/{{ quiz.id }}" class="quiz-link">{{ quiz.title }}</a>
               {% endif %}
             </li>
           {% endfor %}
