@@ -46,12 +46,21 @@ h1 {
     margin-bottom: 2rem;
 }
 
-.filter-container select {
-    margin-left: 10px;
-    padding: 6px 10px;
-    border-radius: 6px;
+/* ✅ Smaller quiz filter only */
+.filter-container .quiz-filter {
+    height: 32px;
+    padding: 4px 10px;
+    font-size: 13px;
+    border-radius: 8px;
     border: 1px solid #ccc;
+    background: #fff;
 }
+
+/* Optional: make the label a bit smaller too */
+.filter-container label {
+    font-size: 14px;
+}
+
 
 .quiz-grid {
     display: grid;
@@ -146,18 +155,45 @@ h1 {
     }
 }
 
-/* Smaller filter dropdown/button */
-.quiz-filter,
-.filter-select,
-select {
-    height: 40px;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 10px;
+/* ===============================
+   Quiz filter – normal form size
+   =============================== */
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-/* If you have a label above it */
-.filter-label {
+.filter-container label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Normal, standard input size */
+.filter-container .quiz-filter {
+    height: 38px;
+    /* normal form height */
+    padding: 6px 12px;
     font-size: 14px;
-    margin-bottom: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Mobile: slightly tighter but still normal */
+@media (max-width: 768px) {
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .filter-container .quiz-filter {
+        height: 36px;
+        font-size: 14px;
+    }
 }

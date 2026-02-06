@@ -203,7 +203,7 @@ function HomePage() {
                 <div className="filter-container">
                     <label htmlFor="type-filter">{filterLabelText}</label>
                     <select
-                        id="type-filter"
+                        className="quiz-filter"
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value)}
                     >
