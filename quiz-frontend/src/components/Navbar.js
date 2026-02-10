@@ -8,14 +8,14 @@ function Navbar() {
     const [query, setQuery] = useState("");
     const [mobileOpen, setMobileOpen] = useState(false);
 
-    // Django (Render) base URL (main site)
+
     const DJANGO_BASE = useMemo(() => {
         return (process.env.REACT_APP_DJANGO_PUBLIC_URL || "http://localhost:8000").replace(/\/+$/, "");
     }, []);
 
-    // React (Vercel) base URL (this app)
+
     const REACT_BASE = useMemo(() => {
-        return (process.env.REACT_APP_PUBLIC_URL || window.location.origin).replace(/\/+$/, "");
+        return window.location.origin.replace(/\/+$/, "");
     }, []);
 
     const goToDjango = (path) => {
@@ -31,15 +31,32 @@ function Navbar() {
         window.location.href = `${ REACT_BASE }${ path }${ hasQuery ? "&" : "?" }lang=${ lang }`;
     };
 
+
     const submitSearch = (e) => {
         e.preventDefault();
         setMobileOpen(false);
-        window.location.href = `${ DJANGO_BASE }/?q=${ encodeURIComponent(query) }&lang=${ lang }`;
+        setShowSearch(false);
+
+        const q = query.trim();
+        if (!q) return;
+
+
+        window.location.href = `${ DJANGO_BASE }/lessons/search/?q=${ encodeURIComponent(q) }&lang=${ lang }`;
     };
 
     const changeLang = (newLang) => {
         setLang(newLang);
         setMobileOpen(false);
+    };
+
+    const openSearch = () => {
+        setShowSearch(true);
+        setMobileOpen(false);
+    };
+
+    const closeSearch = () => {
+        setShowSearch(false);
+        setQuery("");
     };
 
     return (
@@ -69,7 +86,7 @@ function Navbar() {
                         {t.lessons}
                     </button>
 
-                    {/* IMPORTANT: Games must go to React (Vercel), not Django (/games/ doesn't exist) */}
+                    {/* Games must go to React */}
                     <button className="kl-nav-link" onClick={() => goToReact("/")}>
                         {t.games}
                     </button>
@@ -84,26 +101,13 @@ function Navbar() {
 
                 {/* RIGHT */}
                 <div className="kl-right">
-                    {/* Search icon (opens search row below) */}
+                    {/* Search icon */}
                     {!showSearch ? (
-                        <button
-                            className="kl-icon-btn"
-                            onClick={() => setShowSearch(true)}
-                            aria-label="Search"
-                            type="button"
-                        >
+                        <button className="kl-icon-btn" onClick={openSearch} aria-label="Search" type="button">
                             🔍
                         </button>
                     ) : (
-                        <button
-                            className="kl-icon-btn"
-                            onClick={() => {
-                                setShowSearch(false);
-                                setQuery("");
-                            }}
-                            aria-label="Close search"
-                            type="button"
-                        >
+                        <button className="kl-icon-btn" onClick={closeSearch} aria-label="Close search" type="button">
                             ✕
                         </button>
                     )}
@@ -148,7 +152,7 @@ function Navbar() {
                 </div>
             </div>
 
-            {/* SEARCH ROW (responsive) */}
+            {/* SEARCH ROW */}
             {showSearch && (
                 <div className="kl-search-row">
                     <form className="kl-search-form" onSubmit={submitSearch}>
@@ -161,15 +165,7 @@ function Navbar() {
                         <button className="kl-search-submit" type="submit">
                             {t.go}
                         </button>
-                        <button
-                            className="kl-search-close"
-                            type="button"
-                            onClick={() => {
-                                setShowSearch(false);
-                                setQuery("");
-                            }}
-                            aria-label="Close search"
-                        >
+                        <button className="kl-search-close" type="button" onClick={closeSearch} aria-label="Close search">
                             ✕
                         </button>
                     </form>
@@ -188,7 +184,6 @@ function Navbar() {
                     {t.lessons}
                 </button>
 
-                {/* Games -> React */}
                 <button className="kl-mobile-link" onClick={() => goToReact("/")}>
                     {t.games}
                 </button>
@@ -232,3 +227,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
