@@ -18,7 +18,7 @@ function Footer() {
         >
             <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}>
                 <h5 style={{ fontWeight: 700, marginBottom: "1rem" }}>
-                    {lang === "sr" ? "Kontakt" : lang === "de" ? "Kontakt" : "Get Contact"}
+                    {lang === "sr" ? "Kontakt" : lang === "de" ? "Kontakt" : "Get in touch"}
                 </h5>
 
                 <p style={{ marginBottom: "0.3rem" }}>
