@@ -34,7 +34,7 @@ function DragDropQuiz() {
     const RAW = (
         process.env.REACT_APP_API_URL ||
         process.env.REACT_APP_API_BASE_URL ||
-        "https://kidslearning-vhk7.onrender.com/api/"
+        "https://kidslearning.live/api"
     ).replace(/\/+$/, "");
 
     const API_BASE = RAW.endsWith("/api") ? RAW : `${ RAW }/api`;

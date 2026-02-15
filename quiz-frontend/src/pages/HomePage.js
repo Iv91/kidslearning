@@ -22,12 +22,12 @@ function HomePage() {
         return (
             process.env.REACT_APP_API_URL ||
             process.env.REACT_APP_API_BASE_URL ||
-            "https://kidslearning-vhk7.onrender.com/api/"
+            "https://kidslearning.live/api"
         ).replace(/\/$/, "");
     }, []);
 
     const DJANGO_BASE = useMemo(() => {
-        return (process.env.REACT_APP_DJANGO_PUBLIC_URL || "https://kidslearning-vhk7.onrender.com").replace(
+        return (process.env.REACT_APP_DJANGO_PUBLIC_URL || "https://kidslearning.live").replace(
             /\/+$/,
             ""
         );
