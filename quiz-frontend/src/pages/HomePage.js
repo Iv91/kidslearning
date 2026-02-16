@@ -18,28 +18,19 @@ function HomePage() {
 
     const abortRef = useRef(null);
 
-    // ✅ Use DOMAIN as base, not ".../api"
-    // Set this in Vercel:
-    // REACT_APP_API_URL = https://kidslearning.live  (or your Render domain)
-    const API_BASE = useMemo(() => {
+    const DJANGO_BASE = useMemo(() => {
         return (
-            process.env.REACT_APP_API_URL ||
-            process.env.REACT_APP_API_BASE_URL ||
-            process.env.REACT_APP_API_BASE ||
-            "https://kidslearning.live"
+            process.env.REACT_APP_DJANGO_PUBLIC_URL ||
+            "https://www.kidslearning.live"
         ).replace(/\/+$/, "");
     }, []);
 
-    // Main Django site (for Back button)
-    const DJANGO_BASE = useMemo(() => {
-        return (process.env.REACT_APP_DJANGO_PUBLIC_URL || "https://kidslearning.live").replace(
-            /\/+$/,
-            ""
-        );
-    }, []);
+    const API_BASE = useMemo(() => {
+        return `${ DJANGO_BASE }/api`.replace(/\/+$/, "");
+    }, [DJANGO_BASE]);
 
     // Cache (fast back/refresh)
-    const CACHE_KEY = "kidslearning_quizzes_cache_v2";
+    const CACHE_KEY = "kidslearning_quizzes_cache_v1";
     const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
     const getPaginatedData = (data) => {
@@ -101,8 +92,7 @@ function HomePage() {
                 ? "⬅ Zurück zur Hauptseite"
                 : "⬅ Back to Main Site";
 
-    const loadingText =
-        lang === "sr" ? "Učitavam kvizove..." : lang === "de" ? "Lade Quizze..." : "Loading quizzes...";
+    const loadingText = lang === "sr" ? "Učitavam kvizove..." : lang === "de" ? "Lade Quizze..." : "Loading quizzes...";
     const retryText = lang === "sr" ? "Pokušaj ponovo" : lang === "de" ? "Erneut versuchen" : "Try again";
 
     const fetchQuizzes = async () => {
@@ -118,7 +108,7 @@ function HomePage() {
                         setAllQuizzes(parsed.data);
                         setQuizzes(parsed.data);
                         setQuizTypes(["All", ...Array.from(new Set(parsed.data.map((q) => q.quiz_type)))]);
-                        return;
+                        return; // ✅ instant render from cache
                     }
                 }
             }
@@ -135,35 +125,21 @@ function HomePage() {
         abortRef.current = controller;
 
         try {
-            // ✅ Always add /api here (keeps base clean)
-            const url = `${ API_BASE }/api/quizzes/?lang=${ encodeURIComponent(lang) }`;
+            const url = `${ API_BASE }/quizzes/`;
 
-            const res = await fetch(url, {
-                signal: controller.signal,
-                headers: {
-                    Accept: "application/json",
-                },
-            });
-
-            if (!res.ok) {
-                // Try to read JSON error if present (helps debugging)
-                let body = "";
-                try {
-                    body = await res.text();
-                } catch { }
-                throw new Error(`HTTP ${ res.status } ${ body ? `- ${ body.slice(0, 200) }` : "" }`);
-            }
+            const res = await fetch(url, { signal: controller.signal });
+            if (!res.ok) throw new Error(`HTTP ${ res.status }`);
 
             const data = await res.json();
 
-            // API returns LIST or {results: []}
+            // Your API returns a LIST (not paginated)
             const list = Array.isArray(data) ? data : data.results || [];
 
             // Cache it
             try {
                 localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: list }));
             } catch {
-                // ignore
+                // localStorage might be full; ignore
             }
 
             setAllQuizzes(list);
@@ -172,28 +148,20 @@ function HomePage() {
         } catch (err) {
             if (err?.name === "AbortError") return;
             console.error("Failed to load quizzes:", err);
-
-            // friendlier message
-            setError(
-                lang === "sr"
-                    ? "Ne mogu da učitam kvizove."
-                    : lang === "de"
-                        ? "Quizze konnten nicht geladen werden."
-                        : "Failed to load quizzes."
-            );
+            setError("Failed to load quizzes.");
         } finally {
             setLoading(false);
         }
     };
 
-    // initial load + reload on language change (important for multi-lang)
+    // initial load
     useEffect(() => {
         fetchQuizzes();
         return () => {
             if (abortRef.current) abortRef.current.abort();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [lang]);
+    }, []);
 
     // filter changes
     useEffect(() => {
@@ -219,7 +187,7 @@ function HomePage() {
                 <button
                     className="back-btn"
                     onClick={() => {
-                        window.location.href = `${ DJANGO_BASE }/?lang=${ encodeURIComponent(lang) }`;
+                        window.location.href = `${ DJANGO_BASE }/?lang=${ lang }`;
                     }}
                 >
                     {backButtonText}
@@ -231,7 +199,6 @@ function HomePage() {
                 <div className="filter-container">
                     <label htmlFor="type-filter">{filterLabelText}</label>
                     <select
-                        id="type-filter"
                         className="quiz-filter"
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value)}
