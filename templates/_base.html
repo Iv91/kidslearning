@@ -111,18 +111,17 @@
         </a>
     </li>
 
-    <li>
-        <!-- React games app (buyers can change this URL) -->
-        <a class="nav-link" href="https://app.kidslearning.live">
-            {% if lang == "sr" %}
-                Igre
-            {% elif lang == "de" %}
-                Spiele
-            {% else %}
-                Games
-            {% endif %}
-        </a>
-    </li>
+<li>
+    <a class="nav-link" href="https://app.kidslearning.live?lang={{ lang }}">
+        {% if lang == "sr" %}
+            Igre
+        {% elif lang == "de" %}
+            Spiele
+        {% else %}
+            Games
+        {% endif %}
+    </a>
+</li>
 
     <li>
         <a class="nav-link {% if request.resolver_match.url_name == 'resources-home' %}active{% endif %}"
